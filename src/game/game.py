@@ -1,3 +1,3 @@
-class game:
-    def menu(self):
-        print("Welcome to Pig, a dice game. Please choose an option.")
+class Game:
+    def play_against_computer(self):
+        
