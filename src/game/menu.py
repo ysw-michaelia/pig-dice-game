@@ -1,5 +1,5 @@
 from difficulty import Difficulty
-from players import Players
+from player import Player
 from scores import Scores
 
 class Menu:
@@ -41,8 +41,7 @@ class Menu:
             choice_mode = input()
 
             if choice_mode == "1":
-                self.choose_difficulty()
-                #self.game....
+                self.start_computer_game()
             elif choice_mode == "2":
                 self.start_two_player_game()
             elif choice_mode == "3":
@@ -50,15 +49,18 @@ class Menu:
             else:
                 print("Invalid value. Please try again")
 
-    def choose_difficulty(self):
+    def start_computer_game(self):
         while True:
             print("Please choose difficulty, from 1 to 3")
             choice_difficulty = input()
             if choice_difficulty in {"1", "2", "3"}:
                 diff = Difficulty()
                 diff.difficulty_adjust(int(choice_difficulty))
+                break
             else:
                 print("Invalid value, please try again.")
+        name = input("Your name is:")
+        #self.players....
 
     def start_two_player_game(self):
         players = Players()
