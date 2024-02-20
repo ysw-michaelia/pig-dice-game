@@ -1,3 +1,4 @@
+from game import Game
 from difficulty import Difficulty
 from player import Player
 from scores import Scores
@@ -60,10 +61,16 @@ class Menu:
             else:
                 print("Invalid value, please try again.")
         name = input("Your name is:")
-        #self.players....
+        player1 = Player(name)
+        computer = Player("Computer")
+        game = Game(player1, computer)
+        game.play_against_computer(0)
 
     def start_two_player_game(self):
-        players = Players()
+        player_name1 = input('Player 1 please enter your name')
+        player1 = Player(player_name1)
+        player_name2 = input('Player 2 please enter your name')
+        player2 = Player(player_name2)
         # Implement two-player game logic
 
     def show_game_rules(self):
