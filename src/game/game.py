@@ -21,44 +21,43 @@ class Game:
                 print(f"It is {self.players[self.current_player_index].name}'s turn")
                 self.dice_game()
 
-    def end_game(self):
-        self.game_over = True
-
-    def end_turn(self):
-        self.current_player_index = (self.current_player_index + 1) % 2
-
     def dice_game(self):
-        # need to change it to be suitable for both PvE and PvP
         current_player = self.players[self.current_player_index]
         print('"roll", "hold" or "exit"')
-        decision = input()
-        if decision.lower() == "roll":
-            result = self.dice.roll()
-            if result == 1:
-                print(f"{self.players[self.current_player_index].name} rolled a 1. Your turn is over.")
-                current_player.reset_round_points()
-                current_player.current_points_adjust()
-                if self.mode == "PvP":
-                    self.end_turn()
-            else:
-                current_player.add_round_points(result)
-                curr_points = current_player.current_points(result)
-                print(f'You got {result}. Your total points: {curr_points}')
-                if curr_points >= self.target_score:
-                    print(f"Congratulations! {self.players[self.current_player_index].name} win!")
-                    self.end_game()
-        elif decision.lower() == "hold":
-            curr_points = current_player.current_points(0)
-            current_player.reset_round_points()
-            print(f"{self.players[self.current_player_index].name} decided to hold.")
-            print(f"{self.players[self.current_player_index].name} total points: {curr_points}")
-            if self.mode == "PvP":
-                self.end_turn()
-        elif decision.lower() == "Exit":
+        decision = input().lower()
+        if decision == "roll":
+            self.roll_dice(current_player)
+        elif decision == "hold":
+            self.hold(current_player)
+        elif decision == "exit":
             print('Feel free to join again! :)')
             self.end_game()
         else:
             print("Invalid decision. Please enter 'roll', 'hold' or 'exit'.")
+   
+    def roll_dice(self, player):
+        result = self.dice.roll()
+        if result == 1:
+            print(f"{player.name} rolled a 1. Your turn is over.")
+            player.current_points_adjust()
+            player.reset_round_points()
+            if self.mode == "PvP":
+                self.end_turn()
+        else:
+            player.add_round_points(result)
+            curr_points = player.current_points(result)
+            print(f'{player.name} got {result}. Total points: {curr_points}')
+            if curr_points >= self.target_score:
+                print(f"Congratulations! {player.name} wins!")
+                self.end_game()
+
+    def hold(self, player):
+        curr_points = player.current_points(0)
+        player.reset_round_points()
+        print(f"{player.name} decided to hold.")
+        print(f"{player.name} total points: {curr_points}")
+        if self.mode == "PvP":
+            self.end_turn()
 
     def computer_turn(self):
         print("Computer's turn")
@@ -83,3 +82,9 @@ class Game:
             curr_points = self.computer.current_points(0)
             self.computer.reset_round_points()
             print(f"Computer's total points: {curr_points}")
+
+    def end_game(self):
+        self.game_over = True
+
+    def end_turn(self):
+        self.current_player_index = (self.current_player_index + 1) % 2
