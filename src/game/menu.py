@@ -64,8 +64,8 @@ class Menu:
         name = input("Your name is:")
         player1 = Player(name)
         computer = Player("Computer")
-        game = Game(player1, computer)
-        game.play_against_computer()
+        game = Game(player1, computer, mode="PvC")
+        game.play_mode()
 
     def start_two_player_game(self):
         player_name1 = input('Player 1 please enter your name')
