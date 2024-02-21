@@ -49,8 +49,9 @@ class Menu:
                 break
             else:
                 print("Invalid value. Please try again")
-
+                
     def start_computer_game(self):
+        #considering moving the method to game.py
         while True:
             print("Please choose difficulty, from 1 to 3")
             choice_difficulty = input()
@@ -64,7 +65,7 @@ class Menu:
         player1 = Player(name)
         computer = Player("Computer")
         game = Game(player1, computer)
-        game.play_against_computer(0)
+        game.play_against_computer()
 
     def start_two_player_game(self):
         player_name1 = input('Player 1 please enter your name')
