@@ -1,5 +1,6 @@
 from game import Game
-from difficulty import Difficulty
+from intelligence import Intelligence
+from dice import Dice
 from player import Player
 from scores import Scores
 
@@ -50,29 +51,40 @@ class Menu:
             else:
                 print("Invalid value. Please try again")
                 
-    def start_computer_game(self):
-        #considering moving the method to game.py
+    def against_computer_settings(self):
+        print("Difficulty adjust")
         while True:
-            print("Please choose difficulty, from 1 to 3")
-            choice_difficulty = input()
-            if choice_difficulty in {"1", "2", "3"}:
-                diff = Difficulty()
-                diff.difficulty_adjust(int(choice_difficulty))
+            print("Please choose dice probability difficulty, from 1 to 5")
+            prob_difficulty = input()
+            if prob_difficulty in {"1", "2", "3", "4", "5"}:
                 break
             else:
                 print("Invalid value, please try again.")
+                
+        while True:
+            print("Please choose computer strategy difficulty, from 1 to 5")
+            stra_difficulty = input()
+            if stra_difficulty in {"1", "2", "3", "4", "5"}:
+                break
+            else:
+                print("Invalid value, please try again.")
+        
+        diff = Intelligence(int(prob_difficulty), int(stra_difficulty))
+        dice = Dice(probability=diff.dice_probability())
         name = input("Your name is:")
         player1 = Player(name)
         computer = Player("Computer")
-        game = Game(player1, computer, mode="PvC")
-        game.play_mode()
+        game = Game(player1, computer, dice, strategy=diff.choose_action)
+        game.play_game()
 
     def start_two_player_game(self):
         player_name1 = input('Player 1 please enter your name')
         player1 = Player(player_name1)
         player_name2 = input('Player 2 please enter your name')
         player2 = Player(player_name2)
-        # Implement two-player game logic
+        dice = Dice(probability=None)
+        game = Game(player1, player2, dice, strategy=None)
+        game.play_game()
 
     def show_game_rules(self):
         print('''
@@ -90,6 +102,6 @@ class Menu:
     def cheat(self):
         # Implement cheat functionality
 
-if __name__ == "__main__":
-    menu = Menu()
-    menu.menu_main()
+# if __name__ == "__main__":
+#     menu = Menu()
+#     menu.menu_main()

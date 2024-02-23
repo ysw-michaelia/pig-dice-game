@@ -2,5 +2,11 @@ import random
 
 
 class Dice:
+    def __init__(self, probability=None):
+        self.probability = probability
+
     def roll(self):
-        return random(1, 6)
+        if self.probability:
+            return random.choice(self.probability)
+        else:
+            return random.randint(1, 6)
