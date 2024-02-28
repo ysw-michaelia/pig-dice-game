@@ -18,14 +18,39 @@ class Intelligence:
         elif self.probability == 5:
             return [1, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6, 6]
 
-    def choose_action(self):
+    def choose_action(self, computer_round_points):
         if self.strategy == 1:
-            return "roll" if random() > self.probability / 6 else "hold"
+            if computer_round_points < 3:
+                return "roll"
+            elif random() > self.probability / 6:
+                return "roll"
+            else:
+                return "hold"
         elif self.strategy == 2:
-            return "roll" if random() > self.probability / 6 else "hold"
+            if computer_round_points < 5:
+                return "roll"
+            elif random() > self.probability / 6:
+                return "roll"
+            else:
+                return "hold"
         elif self.strategy == 3:
-            return "roll" if random() > self.probability / 6 else "hold"
+            if computer_round_points < 7:
+                return "roll"
+            elif random() > self.probability / 6:
+                return "roll"
+            else:
+                return "hold"
         elif self.strategy == 4:
-            return "roll" if random() > self.probability / 6 else "hold"
+            if computer_round_points < 9:
+                return "roll"
+            elif random() > self.probability / 6:
+                return "roll"
+            else:
+                return "hold"
         elif self.strategy == 5:
-            return "roll" if random() > self.probability / 6 else "hold"
+            if computer_round_points < 11:
+                return "roll"
+            elif random() > self.probability / 6:
+                return "roll"
+            else:
+                return "hold"

@@ -6,6 +6,7 @@ class Player:
 
     def add_round_points(self, points):
         self.round_points += points
+        return self.round_points
 
     def current_points(self, points):
         self.total_points += points

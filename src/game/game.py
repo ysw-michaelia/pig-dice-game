@@ -14,20 +14,19 @@ class Game:
 
     def dice_game(self):
         current_player = self.players[self.current_player_index]
-        if self.players[self.current_player_index].name == 'Computer':
-            action = current_player.strategy
-            if action == "roll":
+        if current_player.name == 'Computer':
+            if self.strategy.choose_action(current_player.add_round_points(0)) == "roll":
                 self.roll_dice(current_player)
             else:
                 self.hold(current_player)
         else:
             print('"roll"(r), "hold"(h) or "exit"(q)')
             decision = input().lower()
-            if decision.lower() == "roll" or "r":
+            if decision.lower() == "roll" or decision.lower() == "r":
                 self.roll_dice(current_player)
-            elif decision.lower() == "hold" or "h":
+            elif decision.lower() == "hold" or decision.lower() == "h":
                 self.hold(current_player)
-            elif decision.lower == "exit" or "q":
+            elif decision.lower == "exit" or decision.lower() == "q":
                 print('Feel free to join again! :)')
                 self.end_game()
             else:

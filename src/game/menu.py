@@ -2,17 +2,19 @@ from game import Game
 from intelligence import Intelligence
 from dice import Dice
 from player import Player
-from scores import Scores
+# from scores import Scores
+
 
 class Menu:
     """
-    A menu showed when game starts. 
+    A menu showed when game starts.
     Options are for choosing by entering corresponding numbers.
     """
 
     def menu_main(self):
         while True:
-            print("Welcome to Pig. Please choose an option. Enter Numbers only")
+            print("Welcome to Pig. Please choose an option.\
+                  Enter Numbers only")
             print("1. Start game")
             print("2. Game rules")
             print("3. Scores")
@@ -24,10 +26,10 @@ class Menu:
                 self.start_game()
             elif choice_menu == "2":
                 self.show_game_rules()
-            elif choice_menu == "3":
-                self.show_scores()
-            elif choice_menu == "4":
-                self.cheat()
+            # elif choice_menu == "3":
+            #     self.show_scores()
+            # elif choice_menu == "4":
+            #     self.cheat()
             elif choice_menu == "5":
                 print("Thank you! See you next time!")
                 break
@@ -43,14 +45,14 @@ class Menu:
             choice_mode = input()
 
             if choice_mode == "1":
-                self.start_computer_game()
+                self.against_computer_settings()
             elif choice_mode == "2":
                 self.start_two_player_game()
             elif choice_mode == "3":
                 break
             else:
                 print("Invalid value. Please try again")
-                
+
     def against_computer_settings(self):
         print("Difficulty adjust")
         while True:
@@ -60,7 +62,7 @@ class Menu:
                 break
             else:
                 print("Invalid value, please try again.")
-                
+
         while True:
             print("Please choose computer strategy difficulty, from 1 to 5")
             stra_difficulty = input()
@@ -68,13 +70,13 @@ class Menu:
                 break
             else:
                 print("Invalid value, please try again.")
-        
+
         diff = Intelligence(int(prob_difficulty), int(stra_difficulty))
         dice = Dice(probability=diff.dice_probability())
         name = input("Your name is:")
         player1 = Player(name)
         computer = Player("Computer")
-        game = Game(player1, computer, dice, strategy=diff.choose_action)
+        game = Game(player1, computer, dice, strategy=diff)
         game.play_game()
 
     def start_two_player_game(self):
@@ -88,20 +90,25 @@ class Menu:
 
     def show_game_rules(self):
         print('''
-        Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to "hold":
-        If the player rolls a 1, they score nothing and it becomes the next player's turn.
-        If the player rolls any other number, it is added to their turn total and the player's turn continues.
-        If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.
+        Each turn, a player repeatedly rolls a die until
+        either a 1 is rolled or the player decides to "hold":
+        If the player rolls a 1, they score nothing and
+        it becomes the next player's turn.
+        If the player rolls any other number, it is added
+        to their turn total and the player's turn continues.
+        If a player chooses to "hold", their turn total is
+        added to their score, and it becomes the next player's turn.
         The first player to score 100 or more points wins.
         ''')
 
-    def show_scores(self):
-        scores = Scores()
-        # Implement showing scores logic
+    # def show_scores(self):
+    #     scores = Scores()
+    #     # Implement showing scores logic
 
-    def cheat(self):
-        # Implement cheat functionality
+    # def cheat(self):
+    #     # Implement cheat functionality
 
-# if __name__ == "__main__":
-#     menu = Menu()
-#     menu.menu_main()
+
+if __name__ == "__main__":
+    menu = Menu()
+    menu.menu_main()
