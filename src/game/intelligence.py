@@ -29,6 +29,8 @@ class Intelligence:
         elif self.strategy == 2:
             if computer_round_points < 5:
                 return "roll"
+            elif computer_round_points > 10:
+                return "hold"
             elif random() > self.probability / 6:
                 return "roll"
             else:
@@ -36,6 +38,8 @@ class Intelligence:
         elif self.strategy == 3:
             if computer_round_points < 7:
                 return "roll"
+            elif computer_round_points > 12:
+                return "hold"
             elif random() > self.probability / 6:
                 return "roll"
             else:
@@ -43,6 +47,8 @@ class Intelligence:
         elif self.strategy == 4:
             if computer_round_points < 9:
                 return "roll"
+            elif computer_round_points > 14:
+                return "hold"
             elif random() > self.probability / 6:
                 return "roll"
             else:
@@ -50,6 +56,8 @@ class Intelligence:
         elif self.strategy == 5:
             if computer_round_points < 11:
                 return "roll"
+            elif computer_round_points > 16:
+                return "hold"
             elif random() > self.probability / 6:
                 return "roll"
             else:
