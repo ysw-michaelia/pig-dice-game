@@ -14,13 +14,14 @@ class Menu:
         self.score = score
 
     def menu_main(self):
+        self.score.load_scores()
+
         while True:
             print("Welcome to Pig. Please choose an option, numbers only:")
             print("1. Start game")
             print("2. Game rules")
             print("3. Scores")
-            print("4. Cheat")
-            print("5. Exit")
+            print("4. Exit")
             choice_menu = input()
 
             if choice_menu == "1":
@@ -29,9 +30,9 @@ class Menu:
                 self.show_game_rules()
             elif choice_menu == "3":
                 self.show_scores()
-            # elif choice_menu == "4":
-            #     self.cheat()
-            elif choice_menu == "5":
+            elif choice_menu == "4":
+                print("Saving...")
+                self.score.save_scores()
                 print("Thank you! See you next time!")
                 break
             else:
@@ -63,14 +64,14 @@ class Menu:
         player1 = self.get_player_name(1)
         computer = Player("Computer")
         game = Game(player1, computer, dice, strategy=diff, mode="PvC")
-        game.play_game()
+        game.start_game()
 
     def player_against_player_settings(self):
         player1 = Player(self.get_player_name("Player 1"))
         player2 = Player(self.get_player_name("Player 2"))
         dice = Dice(probability=None)
         game = Game(player1, player2, dice, strategy=None, mode="PvP")
-        game.play_game()
+        game.start_game()
 
     def show_game_rules(self):
         print('''
@@ -91,7 +92,7 @@ class Menu:
             print('1. PvC high score ranking')
             print('2. PvP high score ranking')
             print("3. Search for player's record")
-            print('4. Exit')
+            print('4. Back')
             choice_score = input()
             if choice_score == "1":
                 self.score.print_top_ten("PvC")
@@ -113,9 +114,6 @@ class Menu:
                 break
             else:
                 print("Invalid value. Please try again")
-
-    # def cheat(self):
-    #     # Implement cheat functionality
 
     def get_difficulty(self, message):
         while True:

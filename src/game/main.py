@@ -1,9 +1,11 @@
 from menu import Menu
+from score import Score
 
 
 def main():
     """Run the main program."""
-    menu = Menu()
+    score = Score()
+    menu = Menu(score)
     menu.menu_main()
 
 

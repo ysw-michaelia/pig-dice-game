@@ -1,6 +1,28 @@
+import json
+
+
 class Score:
     pvc_high_scores = {}
     pvp_high_scores = {}
+
+    @staticmethod
+    def save_scores():
+        data = {
+            'pvc_high_scores': Score.pvc_high_scores,
+            'pvp_high_scores': Score.pvp_high_scores
+        }
+        with open('scores.json', 'w') as file:
+            json.dump(data, file)
+
+    @staticmethod
+    def load_scores():
+        try:
+            with open('scores.json', 'r') as file:
+                scores = json.load(file)
+                Score.pvc_high_scores = scores.get('pvc_high_scores', {})
+                Score.pvp_high_scores = scores.get('pvp_high_scores', {})
+        except FileNotFoundError:
+            pass
 
     def pvc_new_record(self, player_name, score):
         self.pvc_high_scores[player_name] = [score]
