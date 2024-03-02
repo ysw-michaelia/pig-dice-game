@@ -43,6 +43,11 @@ class Score:
             self.print_top_scores("PvP", self.pvp_high_scores)
 
     def print_top_scores(self, mode, high_scores):
+        if not high_scores:
+            print(f"{mode} Top Ten High Scores:")
+            print("No record")
+            return
+
         sorted_scores = sorted(
             high_scores.items(),
             key=lambda x: sum(x[1]),
@@ -59,7 +64,7 @@ class Score:
             print(f"Scores for {player_name} in PvC: {scores}")
             return True
         else:
-            print("No record in PvC")
+            print("Name does not exist in PvC")
             return False
 
     def get_player_pvp_scores(self, player_name):
@@ -68,12 +73,21 @@ class Score:
             print(f"Scores for {player_name} in PvP: {scores}")
             return True
         else:
-            print("No record in PvP")
+            print("Name does not exist in PvP")
             return False
 
-    def update_player_name(self, old_name):
-        new_name = input("Your new name is:")
-        if old_name in self.pvc_high_scores:
-            self.pvc_high_scores[new_name] = self.pvc_high_scores.pop(old_name)
-        if old_name in self.pvp_high_scores:
-            self.pvp_high_scores[new_name] = self.pvp_high_scores.pop(old_name)
+    def update_player_name(self, old_name, message):
+        mode = "PvC" if message == 1 else "PvP"
+        if mode == "PvC":
+            high_scores = self.pvc_high_scores
+        else:
+            high_scores = self.pvp_high_scores
+
+        while True:
+            new_name = input("Your new name is:")
+            if old_name in high_scores:
+                if new_name not in high_scores:
+                    high_scores[new_name] = high_scores.pop(old_name)
+                    break
+                else:
+                    print(f'Name is already taken in {mode} list, try a new one')

@@ -41,7 +41,7 @@ class Game:
         elif decision.lower() == "hold" or decision.lower() == "h":
             self.hold(current_player)
         elif decision.lower == "cheat" or decision.lower() == "c":
-            self.cheat(current_player, cheat=1000)
+            self.cheat(current_player, 1000)
         elif decision.lower == "exit" or decision.lower() == "q":
             print('Feel free to join again! :)')
             print('')
@@ -55,7 +55,11 @@ class Game:
     def roll_dice(self, player):
         print(f'{player.name} decided to roll.')
         time.sleep(1)
-        result = self.dice.roll()
+        if player.name != "Computer":
+            result = self.dice.player_roll()
+        else:
+            result = self.dice.computer_roll()
+
         if result == 1:
             print(f"{player.name} rolled a 1. Your turn is over.")
             print('')
@@ -86,7 +90,7 @@ class Game:
         self.end_turn()
 
     def cheat(self, player, cheat):
-        cheat_points = player.current_points_adjust(cheat)
+        cheat_points = player.current_points(cheat)
         print(f'{player.name} got {cheat}. Total points: {cheat_points}')
         print(f"Congratulations! {player.name} wins!")
         print('')

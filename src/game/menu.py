@@ -23,6 +23,7 @@ class Menu:
             print("3. Scores")
             print("4. Exit")
             choice_menu = input()
+            print('')
 
             if choice_menu == "1":
                 self.start_game()
@@ -45,6 +46,7 @@ class Menu:
             print("2. Two players")
             print("3. Back")
             choice_mode = input()
+            print('')
 
             if choice_mode == "1":
                 self.against_computer_settings()
@@ -67,8 +69,8 @@ class Menu:
         game.start_game()
 
     def player_against_player_settings(self):
-        player1 = Player(self.get_player_name("Player 1"))
-        player2 = Player(self.get_player_name("Player 2"))
+        player1 = self.get_player_name("Player 1")
+        player2 = self.get_player_name("Player 2")
         dice = Dice(probability=None)
         game = Game(player1, player2, dice, strategy=None, mode="PvP")
         game.start_game()
@@ -94,22 +96,15 @@ class Menu:
             print("3. Search for player's record")
             print('4. Back')
             choice_score = input()
+            print('')
             if choice_score == "1":
                 self.score.print_top_ten("PvC")
+                print('')
             elif choice_score == "2":
                 self.score.print_top_ten("PvP")
+                print('')
             elif choice_score == "3":
-                print("Enter the player name you want to search for:")
-                name = input()
-                pvc_player_exists = self.score.get_player_pvc_scores(name)
-                pvp_player_exists = self.score.get_player_pvp_scores(name)
-                if pvc_player_exists or pvp_player_exists:
-                    print("Press 'c' to change name, press 'q' to go back")
-                    choice = input()
-                    if choice == "c":
-                        self.score.update_player_name(name)
-                    elif choice == "q":
-                        break
+                self.search_record()
             elif choice_score == "4":
                 break
             else:
@@ -139,18 +134,61 @@ class Menu:
             while True:
                 print('Your name is:')
                 name = input()
-                if not self.score.pvc_has_player(name):
+                print('')
+                if name == "Computer" or name == "computer":
+                    print('Invalid name, try a new one')
+                elif not self.score.pvc_has_player(name):
                     return Player(name)
                 else:
-                    print('Name exists, try another one.')
+                    print('Name exists, try a new one.')
         else:
             while True:
                 print(f'{message}, your name is:')
-                name = input(message)
+                name = input()
+                print('')
                 if not self.score.pvp_has_player(name):
                     return Player(name)
                 else:
-                    print('Name exists, try another one.')
+                    print('Name exists, try a new one.')
+
+    def search_record(self):
+        print("Enter the player name you want to search for:")
+        name = input()
+        print('')
+        pvc_player_exists = self.score.get_player_pvc_scores(name)
+        pvp_player_exists = self.score.get_player_pvp_scores(name)
+        if pvc_player_exists or pvp_player_exists:
+            self.change_username(name, pvc_player_exists, pvp_player_exists)
+
+    def change_username(self, name, pvc_player_exists, pvp_player_exists):
+        print("Press 'c' to change name, press 'q' to go back")
+        choice = input().lower()
+        print('')
+        if choice == "c":
+            if pvc_player_exists and pvp_player_exists:
+                while True:
+                    print('In which mode do you want to change your name?')
+                    print('1. PvC')
+                    print('2. PvP')
+                    print('3. Back')
+                    print('Enter number only')
+                    choice_name = input()
+                    if choice_name == '1':
+                        self.score.update_player_name(name, 1)
+                        break
+                    elif choice_name == '2':
+                        self.score.update_player_name(name, 2)
+                        break
+                    elif choice_name == '3':
+                        break
+                    else:
+                        print('Invalid value, please try again')
+            elif pvc_player_exists:
+                self.score.update_player_name(name, 1)
+            elif pvp_player_exists:
+                self.score.update_player_name(name, 2)
+        elif choice == "q":
+            pass
 
 
 if __name__ == "__main__":
