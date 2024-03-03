@@ -90,4 +90,4 @@ class Score:
                     high_scores[new_name] = high_scores.pop(old_name)
                     break
                 else:
-                    print(f'Name is already taken in {mode} list, try a new one')
+                    print(f'Name is already taken in {mode} list.')

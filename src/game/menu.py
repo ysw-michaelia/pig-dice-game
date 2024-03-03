@@ -1,8 +1,5 @@
-from game import Game
-from intelligence import Intelligence
-from dice import Dice
-from player import Player
 from score import Score
+from gameSettings import GameSettings
 
 
 class Menu:
@@ -10,8 +7,9 @@ class Menu:
     A menu appears when game starts.
     Options are for choosing by entering corresponding numbers.
     """
-    def __init__(self, score):
-        self.score = score
+    def __init__(self, scores):
+        self.score = scores
+        self.game_settings = GameSettings(scores)
 
     def menu_main(self):
         self.score.load_scores()
@@ -49,31 +47,13 @@ class Menu:
             print('')
 
             if choice_mode == "1":
-                self.against_computer_settings()
+                self.game_settings.against_computer_settings()
             elif choice_mode == "2":
-                self.player_against_player_settings()
+                self.game_settings.player_against_player_settings()
             elif choice_mode == "3":
                 break
             else:
                 print("Invalid value. Please try again")
-
-    def against_computer_settings(self):
-        print("Difficulty adjust")
-        prob_difficulty = self.get_difficulty(1)
-        stra_difficulty = self.get_difficulty(2)
-        diff = Intelligence(int(prob_difficulty), int(stra_difficulty))
-        dice = Dice(probability=diff.dice_probability())
-        player1 = self.get_player_name(1)
-        computer = Player("Computer")
-        game = Game(player1, computer, dice, strategy=diff, mode="PvC")
-        game.start_game()
-
-    def player_against_player_settings(self):
-        player1 = self.get_player_name("Player 1")
-        player2 = self.get_player_name("Player 2")
-        dice = Dice(probability=None)
-        game = Game(player1, player2, dice, strategy=None, mode="PvP")
-        game.start_game()
 
     def show_game_rules(self):
         print('''
@@ -109,47 +89,6 @@ class Menu:
                 break
             else:
                 print("Invalid value. Please try again")
-
-    def get_difficulty(self, message):
-        while True:
-            if message == 1:
-                print("Please choose probability of dice roll level,")
-                print("from 1 to 5:")
-                difficulty = input()
-                if difficulty in {"1", "2", "3", "4", "5"}:
-                    return difficulty
-                else:
-                    print("Invalid value, please try again.")
-            elif message == 2:
-                print("Please choose computer strategy difficulty,")
-                print("from 1 to 5:")
-                difficulty = input()
-                if difficulty in {"1", "2", "3", "4", "5"}:
-                    return difficulty
-                else:
-                    print("Invalid value, please try again.")
-
-    def get_player_name(self, message):
-        if message == 1:
-            while True:
-                print('Your name is:')
-                name = input()
-                print('')
-                if name == "Computer" or name == "computer":
-                    print('Invalid name, try a new one')
-                elif not self.score.pvc_has_player(name):
-                    return Player(name)
-                else:
-                    print('Name exists, try a new one.')
-        else:
-            while True:
-                print(f'{message}, your name is:')
-                name = input()
-                print('')
-                if not self.score.pvp_has_player(name):
-                    return Player(name)
-                else:
-                    print('Name exists, try a new one.')
 
     def search_record(self):
         print("Enter the player name you want to search for:")
