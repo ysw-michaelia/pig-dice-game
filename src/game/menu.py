@@ -18,8 +18,14 @@ Dependencies:
     game settings.
 """
 
+import sys
+import cowsay
+from termcolor import cprint
+from pyfiglet import figlet_format
 from score import Score
 from game_settings import GameSettings
+from colorama import init
+init(strip=not sys.stdout.isatty())
 
 
 class Menu:
@@ -36,6 +42,7 @@ class Menu:
 
     def __init__(self, scores):
         self.score = scores
+        self.score.load_scores()
         self.game_settings = GameSettings(scores)
 
     def menu_main(self):
@@ -43,14 +50,15 @@ class Menu:
         Displays the main menu and handles the user's input to navigate
         through the menu options.
         """
-        self.score.load_scores()
-
+        cprint(figlet_format('pig', font='isometric1'),
+               'green', 'on_black', attrs=['bold'])
         while True:
-            print("Welcome to Pig. Please choose an option, numbers only:")
-            print("1. Start game")
-            print("2. Game rules")
-            print("3. Scores")
-            print("4. Exit")
+            cprint("Welcome to Pig. Please choose an option, numbers only:",
+                   "green", attrs=["bold"])
+            cprint("1. Start game", "green", attrs=["bold"])
+            cprint("2. Game rules", "green", attrs=["bold"])
+            cprint("3. Scores", "green", attrs=["bold"])
+            cprint("4. Exit", "green", attrs=["bold"])
             choice_menu = input()
             print('')
 
@@ -61,12 +69,14 @@ class Menu:
             elif choice_menu == "3":
                 self.show_scores()
             elif choice_menu == "4":
-                print("Saving...")
+                cprint("Saving...", "green", attrs=["bold"])
                 self.score.save_scores()
-                print("Thank you! See you next time!")
+                cprint("Thank you! See you next time!",
+                       "green", attrs=["bold"])
                 break
             else:
-                print("Invalid value. Please try again. Enter numbers only")
+                cprint("Invalid value. Please try again. Enter numbers only",
+                       "red", attrs=["bold"])
 
     def start_game(self):
         """
@@ -74,10 +84,11 @@ class Menu:
         game based on the user's choice.
         """
         while True:
-            print("Choose playing mode, numbers only:")
-            print("1. Play against computer")
-            print("2. Two players")
-            print("3. Back")
+            cprint("Choose playing mode, numbers only:",
+                   "green", attrs=["bold"])
+            cprint("1. Play against computer", "green", attrs=["bold"])
+            cprint("2. Two players", "green", attrs=["bold"])
+            cprint("3. Back", "green", attrs=["bold"])
             choice_mode = input()
             print('')
 
@@ -88,23 +99,26 @@ class Menu:
             elif choice_mode == "3":
                 break
             else:
-                print("Invalid value. Please try again")
+                cprint("Invalid value. Please try again",
+                       "red", attrs=["bold"])
 
     def show_game_rules(self):
         """
         Prints the rules of the game to the console.
         """
-        print('''
+        cprint(cowsay.get_output_string('tux', '''
         Each turn, a player repeatedly rolls a die until
-        either a 1 is rolled or the player decides to "hold":
-        If the player rolls a 1, they score nothing and
-        it becomes the next player's turn.
+        either a 1 is rolled or the player decides to
+        "hold": If the player rolls a 1, they score
+        nothing and it becomes the next player's turn.
         If the player rolls any other number, it is added
-        to their turn total and the player's turn continues.
-        If a player chooses to "hold", their turn total is
-        added to their score, and it becomes the next player's turn.
-        The first player to score 100 or more points wins.
-        ''')
+        to their turn total and the player's turn
+        continues.
+        If a player chooses to "hold", their turn total
+        is added to their score, and it becomes the next
+        player's turn. The first player to score 100 or
+        more points wins.
+        '''), "yellow", attrs=["bold"])
 
     def show_scores(self):
         """
@@ -112,11 +126,13 @@ class Menu:
         for a player's scores.
         """
         while True:
-            print('Choose the list you want to check, numbers only')
-            print('1. PvC high score ranking')
-            print('2. PvP high score ranking')
-            print("3. Search for player's record")
-            print('4. Back')
+            cprint('Choose the list you want to check, numbers only',
+                   "green", attrs=["bold"])
+            cprint('1. PvC high score ranking', "green", attrs=["bold"])
+            cprint('2. PvP high score ranking', "green", attrs=["bold"])
+            cprint("3. Search for player's record",
+                   "green", attrs=["bold"])
+            cprint('4. Back', "green", attrs=["bold"])
             choice_score = input()
             print('')
             if choice_score == "1":
@@ -130,14 +146,16 @@ class Menu:
             elif choice_score == "4":
                 break
             else:
-                print("Invalid value. Please try again")
+                cprint("Invalid value. Please try again",
+                       'red', attrs=['bold'])
 
     def search_record(self):
         """
         Allows searching for a player's score record by name and offers the
         option to change the player's name.
         """
-        print("Enter the player name you want to search for:")
+        cprint("Enter the player name you want to search for:",
+               'green', attrs=['bold'])
         name = input()
         print('')
         pvc_player_exists = self.score.get_player_pvc_scores(name)
@@ -159,17 +177,19 @@ class Menu:
             pvp_player_exists (bool): Indicates if the player has a PvP
             (Player vs Player) score record.
         """
-        print("Press 'c' to change name, press 'q' to go back")
+        cprint("Press 'c' to change name, press any keys to go back",
+               'green', attrs=['bold'])
         choice = input().lower()
         print('')
         if choice == "c":
             if pvc_player_exists and pvp_player_exists:
                 while True:
-                    print('In which mode do you want to change your name?')
-                    print('1. PvC')
-                    print('2. PvP')
-                    print('3. Back')
-                    print('Enter number only')
+                    cprint('In which mode do you want to change your name?',
+                           "green", attrs=["bold"])
+                    cprint('1. PvC', "green", attrs=["bold"])
+                    cprint('2. PvP', "green", attrs=["bold"])
+                    cprint('3. Back', "green", attrs=["bold"])
+                    cprint('Enter number only', "green", attrs=["bold"])
                     choice_name = input()
                     if choice_name == '1':
                         self.score.update_player_name(name, 1)
@@ -180,7 +200,8 @@ class Menu:
                     elif choice_name == '3':
                         break
                     else:
-                        print('Invalid value, please try again')
+                        cprint('Invalid value, please try again',
+                               "red", attrs=["bold"])
             elif pvc_player_exists:
                 self.score.update_player_name(name, 1)
             elif pvp_player_exists:

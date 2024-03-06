@@ -10,10 +10,14 @@ Classes:
     user input, including the mode (player vs computer or player vs player),
     the difficulty level of the computer opponent, and obtaining player names.
 """
+import sys
+from termcolor import cprint
 from intelligence import Intelligence
 from dice import Dice
 from player import Player
 from game import Game
+from colorama import init
+init(strip=not sys.stdout.isatty())
 
 
 class GameSettings:
@@ -41,7 +45,7 @@ class GameSettings:
         setting the intelligence for the computer's dice probability and
         strategy, and initializing the game with these settings.
         """
-        print("Difficulty adjust")
+        cprint("Difficulty:", "green", attrs=["bold"])
         prob_difficulty = self.get_difficulty(1)
         stra_difficulty = self.get_difficulty(2)
         diff = Intelligence(int(prob_difficulty), int(stra_difficulty))
@@ -80,21 +84,25 @@ class GameSettings:
         """
         while True:
             if message == 1:
-                print("Please choose probability of dice roll level,")
-                print("from 1 to 5:")
+                cprint("Please choose probability of dice roll level,",
+                       "green", attrs=["bold"])
+                cprint("from 1 to 5:", "green", attrs=["bold"])
                 difficulty = input()
                 if difficulty in {"1", "2", "3", "4", "5"}:
                     return difficulty
                 else:
-                    print("Invalid value, please try again.")
+                    cprint("Invalid value, please try again.",
+                           "red", attrs=["bold"])
             elif message == 2:
-                print("Please choose computer strategy difficulty,")
-                print("from 1 to 5:")
+                cprint("Please choose computer strategy difficulty,",
+                       "green", attrs=["bold"])
+                cprint("from 1 to 5:", "green", attrs=["bold"])
                 difficulty = input()
                 if difficulty in {"1", "2", "3", "4", "5"}:
                     return difficulty
                 else:
-                    print("Invalid value, please try again.")
+                    cprint("Invalid value, please try again.",
+                           "red", attrs=["bold"])
 
     def get_player_name(self, message):
         """
@@ -111,21 +119,25 @@ class GameSettings:
         """
         if message == 1:
             while True:
-                print('Your name is:')
+                cprint('Your name is:', "green", attrs=["bold"])
                 name = input()
                 print('')
                 if name == "Computer" or name == "computer":
-                    print('Invalid name, try a new one')
+                    cprint('Invalid name, try a new one',
+                           "red", attrs=["bold"])
                 elif not self.score.pvc_has_player(name):
                     return Player(name)
                 else:
-                    print('Name exists, try a new one.')
+                    cprint('Name exists, try a new one.',
+                           "red", attrs=["bold"])
         else:
             while True:
-                print(f'{message}, your name is:')
+                cprint(f'{message}, your name is:',
+                       "green", attrs=["bold"])
                 name = input()
                 print('')
                 if not self.score.pvp_has_player(name):
                     return Player(name)
                 else:
-                    print('Name exists, try a new one.')
+                    cprint('Name exists, try a new one.',
+                           "red", attrs=["bold"])

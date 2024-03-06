@@ -9,6 +9,10 @@ Attributes:
         in Player vs Player (PvP) mode.
 """
 import json
+import sys
+from termcolor import cprint
+from colorama import init
+init(strip=not sys.stdout.isatty())
 
 
 class Score:
@@ -110,8 +114,8 @@ class Score:
             high_scores (dict): The dictionary containing the high scores.
         """
         if not high_scores:
-            print(f"{mode} Top Ten High Scores:")
-            print("No record")
+            cprint(f"{mode} Top Ten High Scores:", 'green', attrs=['bold'])
+            cprint("No record", 'yellow', attrs=['bold'])
             return
 
         sorted_scores = sorted(
@@ -119,10 +123,11 @@ class Score:
             key=lambda x: sum(x[1]),
             reverse=True
         )
-        print(f"{mode} Top Ten High Scores:")
+        cprint(f"{mode} Top Ten High Scores:", 'green', attrs=['bold'])
         for i, (player_name, scores) in enumerate(sorted_scores[:10], start=1):
             total_score = sum(scores)
-            print(f"{i}. {player_name}: {total_score}")
+            cprint(f"{i}. {player_name}: {total_score}",
+                   'yellow', attrs=['bold'])
 
     def get_player_pvc_scores(self, player_name):
         """
@@ -136,10 +141,11 @@ class Score:
         """
         if player_name in self.pvc_high_scores:
             scores = self.pvc_high_scores[player_name]
-            print(f"Scores for {player_name} in PvC: {scores}")
+            cprint(f"Scores for {player_name} in PvC: {scores}",
+                   'yellow', attrs=['bold'])
             return True
         else:
-            print("Name does not exist in PvC")
+            cprint("Name does not exist in PvC", 'yellow', attrs=['bold'])
             return False
 
     def get_player_pvp_scores(self, player_name):
@@ -154,10 +160,11 @@ class Score:
         """
         if player_name in self.pvp_high_scores:
             scores = self.pvp_high_scores[player_name]
-            print(f"Scores for {player_name} in PvP: {scores}")
+            cprint(f"Scores for {player_name} in PvP: {scores}",
+                   'yellow', attrs=['bold'])
             return True
         else:
-            print("Name does not exist in PvP")
+            cprint("Name does not exist in PvP", 'yellow', attrs=['bold'])
             return False
 
     def update_player_name(self, old_name, message):
@@ -175,11 +182,13 @@ class Score:
             high_scores = self.pvp_high_scores
 
         while True:
-            new_name = input("Your new name is:")
+            cprint("Your new name is:", 'green', attrs=['bold'])
+            new_name = input()
             print('')
             if old_name in high_scores:
                 if new_name not in high_scores:
                     high_scores[new_name] = high_scores.pop(old_name)
                     break
                 else:
-                    print(f'Name is already taken in {mode} list.')
+                    cprint(f'Name is already taken in {mode} list.',
+                           'red', attrs=['bold'])
