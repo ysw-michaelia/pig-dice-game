@@ -1,23 +1,57 @@
 Pig Game Project
 Welcome to the Pig Game Project, a simple yet engaging game built in Python where players take turns to roll a die and accumulate points. The objective is to reach a target score before the opponent. The game can be played in two modes: Player vs Player (PvP) and Player vs Computer (PvC).
 
-Files Description
-game.py: Contains the Game class, which orchestrates the flow of the game. It manages the game states, including turns, rolls, scores, and the decision-making process for both human and computer players.
-score.py: Manages the scoring system of the game. It keeps track of high scores and updates them based on game outcomes.
-dice.py: Includes the Dice class responsible for simulating the rolling of a die, providing random outcomes as per dice rules.
-game_settings.py: Contains settings and configurations for the game, such as target scores, modes, and any other customizable settings.
-intelligence.py: Implements the Intelligence class, which defines the strategy used by the computer player in PvC mode. It decides whether the computer will roll or hold based on the current state of the game.
-main.py: The entry point of the project. It initiates the game, processes user input for game settings, and starts the game loop.
-menu.py: Provides the user interface for the game settings, allowing players to choose the game mode, set target scores, and start the game.
-player.py: Contains the Player class that represents a player in the game. It holds the player's current score, manages the accumulation of points, and resets scores as necessary.
+Table of Contents
+Introduction
+Features
+Installation
+Usage
+Game Rules
+High Scores
+Credits
 
-How to Play
-Clone the repository to your local machine.
-Navigate to the project directory.
-Run python main.py to start the game.
-Follow the on-screen instructions to configure your game and begin playing.
+Introduction
+This project implements the Pig Dice Game in Python, providing an interactive experience for players to enjoy against a computer opponent or with another player.
 
-Game Modes
-Player vs Player (PvP): Two human players take turns rolling the die, deciding to "roll" or "hold" to accumulate points towards the target score.
-Player vs Computer (PvC): The human player competes against the computer, which uses a predefined strategy to make decisions.
-Enjoy the game, and may the best player win!
+Features
+Player vs Player (PvP): Two human players can compete against each other.
+Player vs Computer (PvC): Play against the computer with varying difficulty levels.
+High Scores: Track and display high scores for both PvP and PvC modes.
+Customizable Settings: Adjust game settings such as difficulty level and player names.
+
+Installation
+To run the Pig Dice Game, follow these steps:
+
+Clone the repository:
+git clone https://github.com/ysw-michaelia/pig-dice-game
+
+Navigate to the project directory:
+cd pig-dice-game
+
+Run the game:
+python main.py
+
+Usage
+Upon running the game, you will be presented with a main menu where you can choose various options:
+
+Start game: Begin a new game by selecting the mode (PvP or PvC).
+Game rules: View the rules of the Pig Dice Game.
+Scores: Check the high scores for PvP and PvC modes, and search for player records.
+Exit: Quit the game.
+Follow the on-screen instructions to navigate through the menu and play the game.
+
+Game Rules
+The rules of the Pig Dice Game are as follows:
+
+Each turn, a player rolls a die.
+If the player rolls a 1, their turn ends, and they score no points for that turn.
+If the player rolls any other number (2-6), the number is added to their round score.
+The player can choose to hold, which adds their round score to their total score, ending their turn.
+The first player to reach or exceed a target score (default: 100) wins the game.
+
+High Scores
+
+The Pig Dice Game tracks and displays high scores for both PvP and PvC modes. You can view the top ten high scores for each mode from the main menu.
+
+Credits
+This project was developed by Michealia, Shadia, Phiona.
