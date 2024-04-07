@@ -1,3 +1,4 @@
+"""To start the game"""
 from menu import Menu
 from score import Score
 

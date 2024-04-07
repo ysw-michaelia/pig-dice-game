@@ -22,9 +22,9 @@ import sys
 import cowsay
 from termcolor import cprint
 from pyfiglet import figlet_format
+from colorama import init
 from score import Score
 from game_settings import GameSettings
-from colorama import init
 init(strip=not sys.stdout.isatty())
 
 

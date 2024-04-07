@@ -10,8 +10,8 @@ import sys
 import cowsay
 from termcolor import cprint
 from pyfiglet import figlet_format
-from score import Score
 from colorama import init
+from score import Score
 init(strip=not sys.stdout.isatty())
 
 
