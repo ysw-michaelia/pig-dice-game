@@ -25,8 +25,8 @@ class Score:
         pvp_high_scores (dict): A dictionary storing Player vs Player scores.
     """
 
-    pvc_high_scores = {}
-    pvp_high_scores = {}
+    pvc_high_scores = {"testPlayer": [50]}
+    pvp_high_scores = {"testPlayer": [50]}
 
     @staticmethod
     def save_scores():

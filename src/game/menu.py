@@ -23,7 +23,6 @@ import cowsay
 from termcolor import cprint
 from pyfiglet import figlet_format
 from colorama import init
-from score import Score
 from game_settings import GameSettings
 init(strip=not sys.stdout.isatty())
 
@@ -40,10 +39,10 @@ class Menu:
         configure game settings.
     """
 
-    def __init__(self, scores):
-        self.score = scores
+    def __init__(self, score):
+        self.score = score
         self.score.load_scores()
-        self.game_settings = GameSettings(scores)
+        self.game_settings = GameSettings(score)
 
     def menu_main(self):
         """
@@ -193,10 +192,8 @@ class Menu:
                     choice_name = input()
                     if choice_name == '1':
                         self.score.update_player_name(name, 1)
-                        break
                     elif choice_name == '2':
                         self.score.update_player_name(name, 2)
-                        break
                     elif choice_name == '3':
                         break
                     else:
@@ -206,11 +203,3 @@ class Menu:
                 self.score.update_player_name(name, 1)
             elif pvp_player_exists:
                 self.score.update_player_name(name, 2)
-        elif choice == "q":
-            pass
-
-
-if __name__ == "__main__":
-    score = Score()
-    menu = Menu(score)
-    menu.menu_main()
