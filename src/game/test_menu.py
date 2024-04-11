@@ -12,7 +12,7 @@ from score import Score
 class testMenu(unittest.TestCase):
     """test the class"""
 
-    @patch('builtins.input', side_effect=['4'])
+    @patch('builtins.input', side_effect=['randomStuff', '4'])
     def test_menu_display(self, mock_input):
         score = Score()
         menu = Menu(score)
@@ -31,6 +31,8 @@ class testMenu(unittest.TestCase):
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
         self.assertTrue(expected_output in output)
+        self.assertTrue("Invalid value. Please enter numbers only"
+                        in output)
 
     @patch('menu.Menu.start_game')
     @patch('menu.Menu.show_game_rules')
@@ -49,7 +51,7 @@ class testMenu(unittest.TestCase):
         mock_show_scores.assert_called_once()
         mock_save_scores.assert_called_once()
 
-    @patch('builtins.input', side_effect=['3'])
+    @patch('builtins.input', side_effect=['randomStuff', '3'])
     def test_start_game_display(self, mock_input):
         score = Score()
         menu = Menu(score)
@@ -67,6 +69,8 @@ class testMenu(unittest.TestCase):
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
         self.assertTrue(expected_output in output)
+        self.assertTrue("Invalid value. Please enter numbers only"
+                        in output)
 
     @patch('game_settings.GameSettings.against_computer')
     @patch('game_settings.GameSettings.against_player')
@@ -105,9 +109,10 @@ class testMenu(unittest.TestCase):
         menu.show_game_rules()
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
-        self.assertTrue(cowsay.get_output_string('tux', expected_output) in output)
+        self.assertTrue(cowsay.get_output_string('tux', expected_output) in
+                        output)
 
-    @patch('builtins.input', side_effect=['4'])
+    @patch('builtins.input', side_effect=['randomStuff', '4'])
     def test_show_scores_display(self, mock_input):
         score = Score()
         menu = Menu(score)
@@ -126,6 +131,8 @@ class testMenu(unittest.TestCase):
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
         self.assertTrue(expected_output in output)
+        self.assertTrue("Invalid value. Please enter numbers only"
+                        in output)
 
     @patch('score.Score.print_top_ten')
     @patch('menu.Menu.search_record')
@@ -164,7 +171,8 @@ class testMenu(unittest.TestCase):
 
     @patch('score.Score.update_player_name')
     @patch('builtins.input', side_effect=['c', '1', '3', 'randomStuffToQuit'])
-    def test_change_username_change_pvc_or_quit(self, mock_input, mock_update_player_name):
+    def test_change_username_change_pvc_or_quit(self, mock_input,
+                                                mock_update_player_name):
         score = Score()
         menu = Menu(score)
 
@@ -180,8 +188,9 @@ class testMenu(unittest.TestCase):
         mock_update_player_name.assert_called_once()
 
     @patch('score.Score.update_player_name')
-    @patch('builtins.input', side_effect=['c', '2', '3'])
-    def test_change_username_change_pvp_display_menu(self, mock_input, mock_update_player_name):
+    @patch('builtins.input', side_effect=['c', '2', 'randomStuff', '3'])
+    def test_change_username_change_pvp_display_menu(self, mock_input,
+                                                     mock_update_player_name):
         score = Score()
         menu = Menu(score)
 
@@ -202,6 +211,9 @@ class testMenu(unittest.TestCase):
 
         mock_update_player_name.assert_called_once()
 
+        self.assertTrue("Invalid value. Please enter numbers only"
+                        in output)
+
     @patch('score.Score.update_player_name')
     @patch('builtins.input', side_effect=['c', 'c'])
     def test_change_username_only_one_name_in_list(self, mock_input,
@@ -215,7 +227,7 @@ class testMenu(unittest.TestCase):
         menu.change_username('testName', False, True)
 
         self.assertEqual(mock_update_player_name.call_count, 2)
-  
+
 
 if __name__ == "__main__":
     unittest.main()

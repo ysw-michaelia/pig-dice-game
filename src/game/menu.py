@@ -74,7 +74,7 @@ class Menu:
                        "green", attrs=["bold"])
                 break
             else:
-                cprint("Invalid value. Please try again. Enter numbers only",
+                cprint("Invalid value. Please enter numbers only",
                        "red", attrs=["bold"])
 
     def start_game(self):
@@ -98,7 +98,7 @@ class Menu:
             elif choice_mode == "3":
                 break
             else:
-                cprint("Invalid value. Please try again",
+                cprint("Invalid value. Please enter numbers only",
                        "red", attrs=["bold"])
 
     def show_game_rules(self):
@@ -145,7 +145,7 @@ class Menu:
             elif choice_score == "4":
                 break
             else:
-                cprint("Invalid value. Please try again",
+                cprint("Invalid value. Please enter numbers only",
                        'red', attrs=['bold'])
 
     def search_record(self):
@@ -197,7 +197,7 @@ class Menu:
                     elif choice_name == '3':
                         break
                     else:
-                        cprint('Invalid value, please try again',
+                        cprint('Invalid value. Please enter numbers only',
                                "red", attrs=["bold"])
             elif pvc_player_exists:
                 self.score.update_player_name(name, 1)
