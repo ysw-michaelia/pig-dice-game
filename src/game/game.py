@@ -100,9 +100,9 @@ class Game:
             self.roll_dice(current_player)
         elif decision.lower() == "hold" or decision.lower() == "h":
             self.hold(current_player)
-        elif decision.lower == "cheat" or decision.lower() == "c":
+        elif decision.lower() == "cheat" or decision.lower() == "c":
             self.cheat(current_player, 1000)
-        elif decision.lower == "exit" or decision.lower() == "q":
+        elif decision.lower() == "exit" or decision.lower() == "q":
             cprint(cowsay.get_output_string('cow', 'Feel free to join again!'),
                    'green', attrs=['bold'])
             print('')
@@ -141,14 +141,13 @@ class Game:
         if self.curr_player_index == 0:
             cprint(f"{player.name} decided to hold.",
                    "yellow", attrs=['bold'])
-        else:
-            cprint(f"{player.name} decided to hold.",
-                   "cyan", attrs=['bold'])
-        time.sleep(1)
-        if self.curr_player_index == 0:
+            time.sleep(1)
             cprint(f"{player.name} total points: {curr_points}",
                    "yellow", attrs=['bold'])
         else:
+            cprint(f"{player.name} decided to hold.",
+                   "cyan", attrs=['bold'])
+            time.sleep(1)
             cprint(f"{player.name} total points: {curr_points}",
                    "cyan", attrs=['bold'])
         print('')
