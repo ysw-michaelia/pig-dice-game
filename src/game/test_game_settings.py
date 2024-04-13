@@ -40,14 +40,24 @@ class testGameSettings(unittest.TestCase):
         mock_start_game.assert_called_once()
 
     @patch('builtins.input', side_effect=['randomStuff', '3'])
-    def test_get_difficulty_probability(self, mock_input):
+    def test_get_difficulty_probability_3(self, mock_input):
         difficulty = self.game_setting.get_difficulty(1)
         self.assertEqual(difficulty, '3')
 
     @patch('builtins.input', side_effect=['randomStuff', '5'])
-    def test_get_difficulty_strategy(self, mock_input):
+    def test_get_difficulty_strategy_5(self, mock_input):
         difficulty = self.game_setting.get_difficulty(2)
         self.assertEqual(difficulty, '5')
+
+    @patch('builtins.input', side_effect=['randomStuff', '5'])
+    def test_get_difficulty_probability_5(self, mock_input):
+        difficulty = self.game_setting.get_difficulty(1)
+        self.assertEqual(difficulty, '5')
+
+    @patch('builtins.input', side_effect=['randomStuff', '3'])
+    def test_get_difficulty_strategy_3(self, mock_input):
+        difficulty = self.game_setting.get_difficulty(2)
+        self.assertEqual(difficulty, '3')
 
     @patch('builtins.input', side_effect=['computer', 'testPlayer',
                                           'Player1'])

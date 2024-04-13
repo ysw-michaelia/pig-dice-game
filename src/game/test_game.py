@@ -23,6 +23,9 @@ class testGame(unittest.TestCase):
 
         mock_start_round.assert_called_once()
 
+        game.curr_player_index = 1
+        game.start_game()
+
     @patch('game.Game.computer_round')
     @patch('game.Game.player_round')
     def test_take_turns(self, mock_player_round, mock_computer_round):

@@ -12,11 +12,15 @@ from score import Score
 class testMenu(unittest.TestCase):
     """test the class"""
 
+    def setUp(self):
+        self.score = Score()
+        self.menu = Menu(self.score)
+
+    def tearDown(self):
+        pass
+
     @patch('builtins.input', side_effect=['randomStuff', '4'])
     def test_menu_display(self, mock_input):
-        score = Score()
-        menu = Menu(score)
-
         expected_output = (
             "Welcome to Pig. Please choose an option, numbers only:\n"
             "1. Start game\n"
@@ -27,7 +31,7 @@ class testMenu(unittest.TestCase):
 
         capturedOutput = io.StringIO()
         sys.stdout = capturedOutput
-        menu.menu_main()
+        self.menu.menu_main()
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
         self.assertTrue(expected_output in output)
@@ -42,9 +46,7 @@ class testMenu(unittest.TestCase):
     def test_menu_options(self, mock_input, mock_save_scores,
                           mock_show_scores, mock_show_game_rules,
                           mock_start_game):
-        score = Score()
-        menu = Menu(score)
-        menu.menu_main()
+        self.menu.menu_main()
 
         mock_start_game.assert_called_once()
         mock_show_game_rules.assert_called_once()
@@ -53,9 +55,6 @@ class testMenu(unittest.TestCase):
 
     @patch('builtins.input', side_effect=['randomStuff', '3'])
     def test_start_game_display(self, mock_input):
-        score = Score()
-        menu = Menu(score)
-
         expected_output = (
             "Choose playing mode, numbers only:\n"
             "1. Play against computer\n"
@@ -65,7 +64,7 @@ class testMenu(unittest.TestCase):
 
         capturedOutput = io.StringIO()
         sys.stdout = capturedOutput
-        menu.start_game()
+        self.menu.start_game()
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
         self.assertTrue(expected_output in output)
@@ -77,17 +76,12 @@ class testMenu(unittest.TestCase):
     @patch('builtins.input', side_effect=['1', '2', '3'])
     def test_start_game_options(self, mock_input, mock_against_player,
                                 mock_against_computer):
-        score = Score()
-        menu = Menu(score)
-        menu.start_game()
+        self.menu.start_game()
 
         mock_against_computer.assert_called_once()
         mock_against_player.assert_called_once()
 
     def test_show_game_rules(self):
-        score = Score()
-        menu = Menu(score)
-
         expected_output = (
             """
             Each turn, a player repeatedly rolls a die until
@@ -106,7 +100,7 @@ class testMenu(unittest.TestCase):
 
         capturedOutput = io.StringIO()
         sys.stdout = capturedOutput
-        menu.show_game_rules()
+        self.menu.show_game_rules()
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
         self.assertTrue(cowsay.get_output_string('tux', expected_output) in
@@ -114,9 +108,6 @@ class testMenu(unittest.TestCase):
 
     @patch('builtins.input', side_effect=['randomStuff', '4'])
     def test_show_scores_display(self, mock_input):
-        score = Score()
-        menu = Menu(score)
-
         expected_output = (
             "Choose the list you want to check, numbers only\n"
             "1. PvC high score ranking\n"
@@ -127,7 +118,7 @@ class testMenu(unittest.TestCase):
 
         capturedOutput = io.StringIO()
         sys.stdout = capturedOutput
-        menu.show_scores()
+        self.menu.show_scores()
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
         self.assertTrue(expected_output in output)
@@ -139,9 +130,7 @@ class testMenu(unittest.TestCase):
     @patch('builtins.input', side_effect=['1', '2', '3', '4'])
     def test_show_scores_options(self, mock_input, mock_search_record,
                                  mock_print_top_ten):
-        score = Score()
-        menu = Menu(score)
-        menu.show_scores()
+        self.menu.show_scores()
 
         mock_print_top_ten.assert_has_calls([call('PvC'), call('PvP')])
         mock_search_record.assert_called_once()
@@ -152,14 +141,11 @@ class testMenu(unittest.TestCase):
     @patch('builtins.input', return_value='testPlayer')
     def test_search_record(self, mock_input, mock_change_username,
                            mock_player_pvp_scores, mock_player_pvc_scores):
-        score = Score()
-        menu = Menu(score)
-
         expected_output = "Enter the player name you want to search for:"
 
         capturedOutput = io.StringIO()
         sys.stdout = capturedOutput
-        menu.search_record()
+        self.menu.search_record()
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
         self.assertTrue(expected_output in output)
@@ -173,14 +159,11 @@ class testMenu(unittest.TestCase):
     @patch('builtins.input', side_effect=['c', '1', '3', 'randomStuffToQuit'])
     def test_change_username_change_pvc_or_quit(self, mock_input,
                                                 mock_update_player_name):
-        score = Score()
-        menu = Menu(score)
-
         expected_output = "Press 'c' to change name, press any keys to go back"
 
         capturedOutput = io.StringIO()
         sys.stdout = capturedOutput
-        menu.change_username('testName', True, True)
+        self.menu.change_username('testName', True, True)
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
         self.assertTrue(expected_output in output)
@@ -191,9 +174,6 @@ class testMenu(unittest.TestCase):
     @patch('builtins.input', side_effect=['c', '2', 'randomStuff', '3'])
     def test_change_username_change_pvp_display_menu(self, mock_input,
                                                      mock_update_player_name):
-        score = Score()
-        menu = Menu(score)
-
         expected_output = (
             "In which mode do you want to change your name?\n"
             "1. PvC\n"
@@ -204,7 +184,7 @@ class testMenu(unittest.TestCase):
 
         capturedOutput = io.StringIO()
         sys.stdout = capturedOutput
-        menu.change_username('testName', True, True)
+        self.menu.change_username('testName', True, True)
         sys.stdout = sys.__stdout__
         output = capturedOutput.getvalue()
         self.assertTrue(expected_output in output)
@@ -218,13 +198,11 @@ class testMenu(unittest.TestCase):
     @patch('builtins.input', side_effect=['c', 'c'])
     def test_change_username_only_one_name_in_list(self, mock_input,
                                                    mock_update_player_name):
-        score = Score()
-        menu = Menu(score)
-        menu.change_username('testName', True, False)
+        self.menu.change_username('testName', True, False)
 
         score = Score()
-        menu = Menu(score)
-        menu.change_username('testName', False, True)
+        self.menu = Menu(score)
+        self.menu.change_username('testName', False, True)
 
         self.assertEqual(mock_update_player_name.call_count, 2)
 
