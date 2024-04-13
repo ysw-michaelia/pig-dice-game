@@ -2,7 +2,7 @@
 This module contains the Intelligence class, which represents the intelligence
 or decision-making logic for computer-controlled players in a game.
 """
-from random import random
+import random
 
 
 class Intelligence:
@@ -67,7 +67,7 @@ class Intelligence:
             return "roll"
         elif computer_round_points > threshold + 5:
             return "hold"
-        elif random() > self.probability / 6:
+        elif random.random() > self.probability / 6:
             return "roll"
         else:
             return "hold"
