@@ -39,24 +39,23 @@ class testGameSettings(unittest.TestCase):
                                                call("Player 2")])
         mock_start_game.assert_called_once()
 
-    @patch('builtins.input', side_effect=['3'])
+    @patch('builtins.input', side_effect=['randomStuff', '3'])
     def test_get_difficulty_probability(self, mock_input):
         difficulty = self.game_setting.get_difficulty(1)
         self.assertEqual(difficulty, '3')
-        mock_input.assert_called_once_with()
 
-    @patch('builtins.input', side_effect=['5'])
+    @patch('builtins.input', side_effect=['randomStuff', '5'])
     def test_get_difficulty_strategy(self, mock_input):
         difficulty = self.game_setting.get_difficulty(2)
         self.assertEqual(difficulty, '5')
-        mock_input.assert_called_once_with()
 
-    @patch('builtins.input', side_effect=['computer', 'Player1'])
+    @patch('builtins.input', side_effect=['computer', 'testPlayer',
+                                          'Player1'])
     def test_get_player_name_pvc(self, mock_input):
         player = self.game_setting.get_player_name(1)
         self.assertEqual(player.name, 'Player1')
 
-    @patch('builtins.input', side_effect=['Player2'])
+    @patch('builtins.input', side_effect=['testPlayer', 'Player2'])
     def test_get_player_name_pvp(self, mock_input):
         player = self.game_setting.get_player_name('Player 2')
         self.assertEqual(player.name, 'Player2')
