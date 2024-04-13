@@ -13,19 +13,24 @@ class TestIntelligence(unittest.TestCase):
 
     def test_dice_probability_probability_2(self):
         intelligence = Intelligence(probability=2, strategy=1)
-        self.assertEqual(intelligence.dice_probability(), [1, 1, 2, 3, 4, 5, 6, 6])
+        self.assertEqual(intelligence.dice_probability(), [1, 1, 2, 3, 4,
+                                                           5, 6, 6])
 
     def test_dice_probability_probability_3(self):
         intelligence = Intelligence(probability=3, strategy=1)
-        self.assertEqual(intelligence.dice_probability(), [1, 1, 2, 2, 3, 4, 5, 5, 6, 6])
+        self.assertEqual(intelligence.dice_probability(), [1, 1, 2, 2, 3, 4,
+                                                           5, 5, 6, 6])
 
     def test_dice_probability_probability_4(self):
         intelligence = Intelligence(probability=4, strategy=1)
-        self.assertEqual(intelligence.dice_probability(), [1, 1, 1, 2, 2, 3, 4, 5, 6, 6, 6])
+        self.assertEqual(intelligence.dice_probability(), [1, 1, 1, 2, 2, 3,
+                                                           4, 5, 6, 6, 6])
 
     def test_dice_probability_probability_5(self):
         intelligence = Intelligence(probability=5, strategy=1)
-        self.assertEqual(intelligence.dice_probability(), [1, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6, 6])
+        self.assertEqual(intelligence.dice_probability(), [1, 1, 1, 2, 2, 3,
+                                                           3, 4, 5, 5, 6, 6,
+                                                           6])
 
     def test_dice_probability_probability_other(self):
         intelligence = Intelligence(probability=6, strategy=1)
