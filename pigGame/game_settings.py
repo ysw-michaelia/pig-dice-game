@@ -12,8 +12,8 @@ Classes:
 """
 import sys
 from termcolor import cprint
-from intelligence import Intelligence
 from colorama import init
+from intelligence import Intelligence
 from dice import Dice
 from player import Player
 from game import Game

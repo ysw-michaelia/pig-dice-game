@@ -1,29 +1,32 @@
-Pig Game Project
+# Pig Game Project
 Welcome to the Pig Game Project, a simple yet engaging game built in Python where players take turns to roll a die and accumulate points. The objective is to reach a target score before the opponent. The game can be played in two modes: Player vs Player (PvP) and Player vs Computer (PvC).
 
-Table of Contents
-Introduction
-Features
-Installation
-Usage
-Game Rules
-High Scores
-Credits
+# Table of Contents
+- Introduction
+- Features
+- Installation
+- Usage
+- Game Rules
+- High Scores
+- Credits
 
-Introduction
+## Introduction
 This project implements the Pig Dice Game in Python, providing an interactive experience for players to enjoy against a computer opponent or with another player.
 
-Features
-Player vs Player (PvP): Two human players can compete against each other.
-Player vs Computer (PvC): Play against the computer with varying difficulty levels.
-High Scores: Track and display high scores for both PvP and PvC modes.
-Customizable Settings: Adjust game settings such as difficulty level and player names.
+## Features
+- Colorful design: The game interface is vibrant and colorful, even in the terminal environment.
+- Two Game Modes: Enjoy both Player vs Player (PvP) and Player vs Computer (PvC) modes.
+- Adjustable Difficulty: Tailor the game to your preference by adjusting the probability of the dice and the computer's strategy in PvC mode.
+- Quit Anytime: Players have the freedom to quit the game at any point during gameplay.
+- Game Rules: Access and review the game rules from the menu.
+- Score record: Player can check their recoord in a ranking list.
+- Searchable Records: Easily find and access player records by searching for their name.
+- Name Customization: Personalize your gaming experience by setting or changing your player name.
 
-Installation
+
+## Installation
 To run the Pig Dice Game, follow these steps:
-
-Clone the repository:
-git clone https://github.com/ysw-michaelia/pig-dice-game
+- Clone the repository: git clone https://github.com/ysw-michaelia/pig-dice-game
 
 Navigate to the project directory:
 cd pig-dice-game

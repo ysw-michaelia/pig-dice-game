@@ -3,7 +3,7 @@
 import unittest
 import io
 from unittest.mock import patch, mock_open
-from score import Score
+from pigGame.score import Score
 
 
 class TestScore(unittest.TestCase):
@@ -15,7 +15,7 @@ class TestScore(unittest.TestCase):
     def tearDown(self):
         pass
 
-    @patch('score.open', new_callable=mock_open)
+    @patch('pigGame.score.open', new_callable=mock_open)
     @patch('json.dump')
     def test_save_scores(self, mock_dump, mock_open):
         Score.save_scores()
@@ -72,12 +72,12 @@ class TestScore(unittest.TestCase):
         self.score.pvp_high_scores[player_name] = [50]
         self.assertTrue(self.score.pvp_has_player(player_name))
 
-    @patch('score.Score.print_top_scores')
+    @patch('pigGame.score.Score.print_top_scores')
     def test_print_top_ten_pvc(self, mock_print_top_scores):
         self.score.print_top_ten("PvC")
         mock_print_top_scores.assert_called_once_with("PvC", self.score.pvc_high_scores)
 
-    @patch('score.Score.print_top_scores')
+    @patch('pigGame.score.Score.print_top_scores')
     def test_print_top_ten_pvp(self, mock_print_top_scores):
         self.score.print_top_ten("PvP")
         mock_print_top_scores.assert_called_once_with("PvP", self.score.pvp_high_scores)

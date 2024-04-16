@@ -1,7 +1,7 @@
 """unite test for intelligence"""
 import unittest
 from unittest.mock import patch
-from intelligence import Intelligence
+from pigGame.intelligence import Intelligence
 
 
 class TestIntelligence(unittest.TestCase):

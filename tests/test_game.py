@@ -4,15 +4,15 @@ from unittest.mock import patch, MagicMock
 import unittest
 import sys
 import io
-from intelligence import Intelligence
-from player import Player
-from game import Game
+from pigGame.intelligence import Intelligence
+from pigGame.player import Player
+from pigGame.game import Game
 
 
 class testGame(unittest.TestCase):
     """test the class"""
 
-    @patch('game.Game.start_round')
+    @patch('pigGame.game.Game.start_round')
     @patch('builtins.input', side_effect=['q', 'q'])
     def test_start_game(self, mock_input, mock_start_round):
         player1 = Player("Player1")
@@ -26,8 +26,8 @@ class testGame(unittest.TestCase):
         game.curr_player_index = 1
         game.start_game()
 
-    @patch('game.Game.computer_round')
-    @patch('game.Game.player_round')
+    @patch('pigGame.game.Game.computer_round')
+    @patch('pigGame.game.Game.player_round')
     def test_take_turns(self, mock_player_round, mock_computer_round):
         player1 = Player("Player1")
         player2 = Player("Computer")
@@ -44,10 +44,10 @@ class testGame(unittest.TestCase):
 
         mock_computer_round.assert_called_once_with(player2)
 
-    @patch('game.Game.hold')
-    @patch('game.Game.roll_dice')
-    @patch('player.Player.add_round_points')
-    @patch('intelligence.Intelligence.choose_action')
+    @patch('pigGame.game.Game.hold')
+    @patch('pigGame.game.Game.roll_dice')
+    @patch('pigGame.player.Player.add_round_points')
+    @patch('pigGame.intelligence.Intelligence.choose_action')
     def test_computer_round(self, mock_choose_action, mock_add_round_points,
                             mock_roll_dice, mock_hold):
         player1 = Player("Player1")
@@ -126,7 +126,7 @@ class testGame(unittest.TestCase):
         output = capturedOutput.getvalue()
         self.assertTrue(expected_output in output)
 
-    @patch('game.Game.roll_result_1')
+    @patch('pigGame.game.Game.roll_result_1')
     def test_roll_dice_result_1_player(self, mock_roll_result_1):
         player = Player("Player1")
         dice = MagicMock()
@@ -137,7 +137,7 @@ class testGame(unittest.TestCase):
 
         mock_roll_result_1.assert_called_once_with(player)
 
-    @patch('game.Game.roll_result_1')
+    @patch('pigGame.game.Game.roll_result_1')
     def test_roll_dice_result_1_computer(self, mock_roll_result_1):
         player = Player("Computer")
         dice = MagicMock()
@@ -148,7 +148,7 @@ class testGame(unittest.TestCase):
 
         mock_roll_result_1.assert_called_once_with(player)
 
-    @patch('game.Game.roll_result_other')
+    @patch('pigGame.game.Game.roll_result_other')
     def test_roll_dice_result_other_player(self, mock_roll_result_other):
         player = Player("Player1")
         dice = MagicMock()
@@ -159,7 +159,7 @@ class testGame(unittest.TestCase):
 
         mock_roll_result_other.assert_called_once_with(player, 4)
 
-    @patch('game.Game.roll_result_other')
+    @patch('pigGame.game.Game.roll_result_other')
     def test_roll_dice_result_other_computer(self, mock_roll_result_other):
         player = Player("Computer")
         dice = MagicMock()
@@ -170,8 +170,8 @@ class testGame(unittest.TestCase):
 
         mock_roll_result_other.assert_called_once_with(player, 3)
 
-    @patch('game.Game.end_round')
-    @patch('game.Game.end_turn')
+    @patch('pigGame.game.Game.end_round')
+    @patch('pigGame.game.Game.end_turn')
     def test_hold(self, mock_end_turn, mock_end_round):
         player = Player("Player1")
         game = Game([], None, None, "")
@@ -181,8 +181,8 @@ class testGame(unittest.TestCase):
         mock_end_round.assert_called_once()
         mock_end_turn.assert_called_once()
 
-    @patch('game.Game.high_score_list_checking')
-    @patch('game.Game.end_game')
+    @patch('pigGame.game.Game.high_score_list_checking')
+    @patch('pigGame.game.Game.end_game')
     def test_cheat(self, mock_end_game, mock_high_score_list_checking):
         player = Player("Player1")
         game = Game([], None, None, "")
@@ -194,10 +194,10 @@ class testGame(unittest.TestCase):
                                                               1000)
         mock_end_game.assert_called_once()
 
-    @patch('player.Player.reset_round_points')
-    @patch('player.Player.current_points_adjust')
-    @patch('game.Game.end_round')
-    @patch('game.Game.end_turn')
+    @patch('pigGame.player.Player.reset_round_points')
+    @patch('pigGame.player.Player.current_points_adjust')
+    @patch('pigGame.game.Game.end_round')
+    @patch('pigGame.game.Game.end_turn')
     def test_roll_result_1(self, mock_end_turn, mock_end_round,
                            mock_current_p, mock_reset_round_p):
         player = Player("Player1")
@@ -211,10 +211,10 @@ class testGame(unittest.TestCase):
         mock_end_round.assert_called_once()
         mock_end_turn.assert_called_once()
 
-    @patch('player.Player.current_points')
-    @patch('player.Player.add_round_points')
-    @patch('game.Game.high_score_list_checking')
-    @patch('game.Game.end_game')
+    @patch('pigGame.player.Player.current_points')
+    @patch('pigGame.player.Player.add_round_points')
+    @patch('pigGame.game.Game.high_score_list_checking')
+    @patch('pigGame.game.Game.end_game')
     def test_roll_result_other(self, mock_end_game,
                                mock_high_score_list_checking,
                                mock_add_round_p, mock_curr_p):

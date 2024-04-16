@@ -169,7 +169,7 @@ class Game:
         else:
             cprint(f"{player.name} decided to cheat.",
                    "cyan", attrs=['bold'])
-            print(f'{player.name} got {cheat}. Total points: {cheat_points}',
+            cprint(f'{player.name} got {cheat}. Total points: {cheat_points}',
                   "cyan", attrs=['bold'])
         cprint(cowsay.get_output_string(
             'turtle', f'Congratulations! {player.name} wins!'),

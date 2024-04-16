@@ -2,8 +2,8 @@
 
 from unittest.mock import patch, call
 import unittest
-from game_settings import GameSettings
-from score import Score
+from pigGame.game_settings import GameSettings
+from pigGame.score import Score
 
 
 class testGameSettings(unittest.TestCase):
@@ -17,8 +17,8 @@ class testGameSettings(unittest.TestCase):
         pass
 
     @patch('game.Game.start_game')
-    @patch('game_settings.GameSettings.get_player_name')
-    @patch('game_settings.GameSettings.get_difficulty')
+    @patch('pigGame.game_settings.GameSettings.get_player_name')
+    @patch('pigGame.game_settings.GameSettings.get_difficulty')
     @patch('builtins.input', side_effect=['2', '3', 'Player1'])
     def test_against_computer(self, mock_input, mock_get_diff,
                               mock_get_player_name, mock_start_game):
@@ -29,7 +29,7 @@ class testGameSettings(unittest.TestCase):
         mock_start_game.assert_called_once()
 
     @patch('game.Game.start_game')
-    @patch('game_settings.GameSettings.get_player_name',
+    @patch('pigGame.game_settings.GameSettings.get_player_name',
            side_effect=['Player1', 'Player2'])
     def test_against_player(self, mock_get_player_name,
                             mock_start_game):

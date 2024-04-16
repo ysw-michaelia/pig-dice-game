@@ -5,8 +5,8 @@ import unittest
 import sys
 import io
 import cowsay
-from menu import Menu
-from score import Score
+from pigGame.menu import Menu
+from pigGame.score import Score
 
 
 class testMenu(unittest.TestCase):
@@ -38,10 +38,10 @@ class testMenu(unittest.TestCase):
         self.assertTrue("Invalid value. Please enter numbers only"
                         in output)
 
-    @patch('menu.Menu.start_game')
-    @patch('menu.Menu.show_game_rules')
-    @patch('menu.Menu.show_scores')
-    @patch('score.Score.save_scores')
+    @patch('pigGame.menu.Menu.start_game')
+    @patch('pigGame.menu.Menu.show_game_rules')
+    @patch('pigGame.menu.Menu.show_scores')
+    @patch('pigGame.score.Score.save_scores')
     @patch('builtins.input', side_effect=['1', '2', '3', '4'])
     def test_menu_options(self, mock_input, mock_save_scores,
                           mock_show_scores, mock_show_game_rules,
@@ -125,8 +125,8 @@ class testMenu(unittest.TestCase):
         self.assertTrue("Invalid value. Please enter numbers only"
                         in output)
 
-    @patch('score.Score.print_top_ten')
-    @patch('menu.Menu.search_record')
+    @patch('pigGame.score.Score.print_top_ten')
+    @patch('pigGame.menu.Menu.search_record')
     @patch('builtins.input', side_effect=['1', '2', '3', '4'])
     def test_show_scores_options(self, mock_input, mock_search_record,
                                  mock_print_top_ten):
@@ -135,9 +135,9 @@ class testMenu(unittest.TestCase):
         mock_print_top_ten.assert_has_calls([call('PvC'), call('PvP')])
         mock_search_record.assert_called_once()
 
-    @patch('score.Score.get_player_pvc_scores')
-    @patch('score.Score.get_player_pvp_scores')
-    @patch('menu.Menu.change_username')
+    @patch('pigGame.score.Score.get_player_pvc_scores')
+    @patch('pigGame.score.Score.get_player_pvp_scores')
+    @patch('pigGame.menu.Menu.change_username')
     @patch('builtins.input', return_value='testPlayer')
     def test_search_record(self, mock_input, mock_change_username,
                            mock_player_pvp_scores, mock_player_pvc_scores):
@@ -155,7 +155,7 @@ class testMenu(unittest.TestCase):
 
         mock_change_username.assert_called_once()
 
-    @patch('score.Score.update_player_name')
+    @patch('pigGame.score.Score.update_player_name')
     @patch('builtins.input', side_effect=['c', '1', '3', 'randomStuffToQuit'])
     def test_change_username_change_pvc_or_quit(self, mock_input,
                                                 mock_update_player_name):
@@ -170,7 +170,7 @@ class testMenu(unittest.TestCase):
 
         mock_update_player_name.assert_called_once()
 
-    @patch('score.Score.update_player_name')
+    @patch('pigGame.score.Score.update_player_name')
     @patch('builtins.input', side_effect=['c', '2', 'randomStuff', '3'])
     def test_change_username_change_pvp_display_menu(self, mock_input,
                                                      mock_update_player_name):
@@ -194,7 +194,7 @@ class testMenu(unittest.TestCase):
         self.assertTrue("Invalid value. Please enter numbers only"
                         in output)
 
-    @patch('score.Score.update_player_name')
+    @patch('pigGame.score.Score.update_player_name')
     @patch('builtins.input', side_effect=['c', 'c'])
     def test_change_username_only_one_name_in_list(self, mock_input,
                                                    mock_update_player_name):

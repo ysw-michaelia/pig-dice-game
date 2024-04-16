@@ -1,5 +1,5 @@
 import unittest
-from dice import Dice
+from pigGame.dice import Dice
 
 
 class TestDice(unittest.TestCase):
@@ -20,7 +20,7 @@ class TestDice(unittest.TestCase):
         """Test player_roll method."""
         dice = Dice()
         result = dice.player_roll()
-        self.assertTrue(1 <= result <= 6)  
+        self.assertTrue(1 <= result <= 6)
         # Ensure the result is within the range [1, 6]
 
     def test_computer_roll(self):
