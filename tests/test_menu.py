@@ -71,8 +71,8 @@ class testMenu(unittest.TestCase):
         self.assertTrue("Invalid value. Please enter numbers only"
                         in output)
 
-    @patch('game_settings.GameSettings.against_computer')
-    @patch('game_settings.GameSettings.against_player')
+    @patch('pigGame.game_settings.GameSettings.against_computer')
+    @patch('pigGame.game_settings.GameSettings.against_player')
     @patch('builtins.input', side_effect=['1', '2', '3'])
     def test_start_game_options(self, mock_input, mock_against_player,
                                 mock_against_computer):

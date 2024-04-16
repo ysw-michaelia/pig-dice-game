@@ -16,7 +16,7 @@ class testGameSettings(unittest.TestCase):
     def tearDown(self):
         pass
 
-    @patch('game.Game.start_game')
+    @patch('pigGame.game.Game.start_game')
     @patch('pigGame.game_settings.GameSettings.get_player_name')
     @patch('pigGame.game_settings.GameSettings.get_difficulty')
     @patch('builtins.input', side_effect=['2', '3', 'Player1'])
@@ -28,7 +28,7 @@ class testGameSettings(unittest.TestCase):
         mock_get_player_name.assert_called_with(1)
         mock_start_game.assert_called_once()
 
-    @patch('game.Game.start_game')
+    @patch('pigGame.game.Game.start_game')
     @patch('pigGame.game_settings.GameSettings.get_player_name',
            side_effect=['Player1', 'Player2'])
     def test_against_player(self, mock_get_player_name,

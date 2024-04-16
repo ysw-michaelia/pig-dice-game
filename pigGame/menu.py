@@ -23,7 +23,7 @@ import cowsay
 from termcolor import cprint
 from pyfiglet import figlet_format
 from colorama import init
-from game_settings import GameSettings
+from pigGame.game_settings import GameSettings
 init(strip=not sys.stdout.isatty())
 
 

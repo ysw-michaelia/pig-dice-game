@@ -11,7 +11,7 @@ import cowsay
 from termcolor import cprint
 from pyfiglet import figlet_format
 from colorama import init
-from score import Score
+from pigGame.score import Score
 init(strip=not sys.stdout.isatty())
 
 
@@ -170,7 +170,7 @@ class Game:
             cprint(f"{player.name} decided to cheat.",
                    "cyan", attrs=['bold'])
             cprint(f'{player.name} got {cheat}. Total points: {cheat_points}',
-                  "cyan", attrs=['bold'])
+                   "cyan", attrs=['bold'])
         cprint(cowsay.get_output_string(
             'turtle', f'Congratulations! {player.name} wins!'),
             'green', attrs=['bold'])

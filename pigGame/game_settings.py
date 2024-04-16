@@ -13,10 +13,10 @@ Classes:
 import sys
 from termcolor import cprint
 from colorama import init
-from intelligence import Intelligence
-from dice import Dice
-from player import Player
-from game import Game
+from pigGame.intelligence import Intelligence
+from pigGame.dice import Dice
+from pigGame.player import Player
+from pigGame.game import Game
 init(strip=not sys.stdout.isatty())
 
 

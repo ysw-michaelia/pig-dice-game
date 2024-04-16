@@ -228,8 +228,8 @@ class testGame(unittest.TestCase):
         mock_high_score_list_checking.assert_called_once_with(player.name, 150)
         mock_end_game.assert_called_once()
 
-    @patch('score.Score.pvc_new_record')
-    @patch('score.Score.pvp_new_record')
+    @patch('pigGame.score.Score.pvc_new_record')
+    @patch('pigGame.score.Score.pvp_new_record')
     def test_high_score_list_checking(self, mock_pvp_new_record,
                                       mock_pvc_new_record):
         game = Game([], None, None, "PvC")

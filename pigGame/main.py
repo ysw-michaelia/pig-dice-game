@@ -1,6 +1,6 @@
 """To start the game"""
-from menu import Menu
-from score import Score
+from pigGame.menu import Menu
+from pigGame.score import Score
 
 
 def main():
