@@ -3,7 +3,7 @@ PYTHON ?= python
 
 # To define targets in each directory under the src/
 define FOREACH
-	for DIR in src/*; do \
+	for DIR in pigGame/* tests/*; do \
 		$(MAKE) -C $$DIR $(1); \
 	done
 endef
@@ -35,14 +35,33 @@ installed:
 
 run:
 	@printf "This Starts the game\n"
-	$(PYTHON) src/game/main.py
+	$(PYTHON) pigGame/main.py
 
 # ---------------------------------------------------------
 # Test
 #
 
+test:
+	$(PYTHON) -m unittest discover -b tests/
+
+coverage:
+	$(PYTHON) -m coverage run -m unittest discover -b tests/
+	coverage report
+	coverage html
+
 pylint:
-	for f in src/game/*.py ; do pylint $${f} ; done
+	for f in pigGame/*.py ; do pylint $${f} ; done
 
 flake8:
-	for f in src/game/*.py ; do flake8 $${f} ; done
+	for f in pigGame/*.py ; do flake8 $${f} ; done
+
+# ---------------------------------------------------------
+# Generating documentation
+#
+.PHONY: doc
+
+doc:
+	mkdir -p doc
+	$(PYTHON) -m pydoc -w pigGame
+	# mv *.html doc
+
