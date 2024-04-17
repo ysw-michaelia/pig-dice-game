@@ -37,13 +37,31 @@ class GameSettings:
     """
 
     def __init__(self, score):
+        """
+        Initialize a GameSettings object with the provided score.
+
+        Args:
+            score (Score): An instance of the Score class used for score
+            management and to check if player names already exist in the
+            score records.
+
+        Attributes:
+            score (Score): An instance of the Score class to manage scores.
+
+        Example:
+            # Initialize a GameSettings object with a Score instance
+            score_instance = Score()
+            game_settings = GameSettings(score_instance)
+        """
         self.score = score
 
     def against_computer(self):
         """
-        Configures and starts a game against the computer. This includes
-        setting the intelligence for the computer's dice probability and
-        strategy, and initializing the game with these settings.
+        Configure and starts a game against the computer.
+
+        This includes setting the intelligence for the computer's dice
+        probability and strategy, and initializing the game with these
+        settings.
         """
         cprint("Difficulty:", "green", attrs=["bold"])
         prob_difficulty = self.get_difficulty(1)
@@ -58,9 +76,11 @@ class GameSettings:
 
     def against_player(self):
         """
-        Configures and starts a game between two players. It obtains the names
-        for both players and initializes the game without any specific strategy
-        or modified dice probability, implying a fair game.
+        Configure and starts a game between two players.
+
+        It obtains the names for both players and initializes the game without
+        any specific strategy or modified dice probability, implying a fair
+        game.
         """
         player1 = self.get_player_name("Player 1")
         player2 = self.get_player_name("Player 2")
@@ -71,16 +91,26 @@ class GameSettings:
 
     def get_difficulty(self, message):
         """
-        Prompts the user to select a difficulty level for the computer, either
-        for dice probability or strategy based on the message argument.
+        Prompt the user to select a difficulty level for the computer.
+
+        This method presents the user with a prompt to select the difficulty
+        level for either the computer's dice probability or its strategy,
+        based on the value of the 'message' argument. If 'message' is 1,
+        it prompts the user to choose the difficulty level for the dice
+        probability. If 'message' is 2, it prompts the user to choose the
+        difficulty level for the computer's strategy.
 
         Parameters:
-            message (int): Determines whether the prompt is for selecting the
-            dice probability difficulty (1) or the strategy difficulty (2).
+            message (int): An integer value that determines the type of
+                difficulty level being prompted. If 'message' is 1, it prompts
+                for dice probability difficulty. If 'message' is 2, it prompts
+                for computer strategy difficulty.
 
         Returns:
             str: The chosen difficulty level as a string, guaranteed to be
-            between "1" and "5".
+                between "1" and "5". If the user provides an invalid value,
+                the method continues to prompt until a valid difficulty level
+                is selected.
         """
         while True:
             if message == 1:
@@ -106,13 +136,18 @@ class GameSettings:
 
     def get_player_name(self, message):
         """
-        Obtains a player name from user input. Ensures the name is not
-        "Computer" and does not already exist in the relevant score records,
-        based on the game mode.
+        Obtain a player name from user input and ensure its uniqueness.
+
+        This method prompts the user to enter a player name based on the
+        provided message or identifier. It ensures that the entered name is
+        not "Computer" or "computer" and does not already exist in the
+        relevant score records, depending on the game mode specified by the
+        message.
 
         Parameters:
-            message (str or int): A message or identifier to indicate whether
-            the name is for a player in a PvC or PvP setting.
+            message (str or int): A message or identifier indicating whether
+                the name is for a player in a Player vs. Computer (PvC) or
+                Player vs. Player (PvP) setting.
 
         Returns:
             Player: A new Player instance with the provided name.
