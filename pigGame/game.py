@@ -17,8 +17,8 @@ init(strip=not sys.stdout.isatty())
 
 class Game:
     """
-    Represents a game of Pig, where players take turns rolling a die
-    to accumulate points.
+    Represent a game of Pig, where players take turns rolling a die.
+
     The game can be played in different modes: Player vs Player (PvP)
     or Player vs Computer (PvC).
 
@@ -34,6 +34,19 @@ class Game:
     """
 
     def __init__(self, players, dice, strategy, mode):
+        """
+        Initialize a Game object with players, dice, strategy, and game mode.
+
+        Args:
+            players (list of Player): A list containing the two players.
+            dice (Dice): An instance of the Dice class representing the game's
+                die.
+            strategy (Intelligence): An instance of the Intelligence class
+                representing the computer's decision-making process.
+            mode (str): The mode of the game, either "PvP" (Player vs Player)
+                or "PvC"
+                (Player vs Computer).
+        """
         self.players = players
         self.dice = dice
         self.strategy = strategy
@@ -46,8 +59,15 @@ class Game:
 
     def start_game(self):
         """
-        Starts the game and manages the flow of turns between players until
-        the game is over.
+        Begin playing the game and manage the turn flow.
+
+        This method orchestrates the game's progress, including initiating
+        rounds and managing player turns until the game reaches its conclusion.
+
+        During each iteration, it checks if the current round has concluded.
+        If so, it displays the round number using a stylized banner, then
+        starts the round. It then proceeds to prompt the current player for
+        their turn, alternating between players until the game concludes.
         """
         while not self.game_over:
             if self.round_finished:
@@ -66,8 +86,16 @@ class Game:
 
     def take_turns(self):
         """
-        Manages the turns for each player, calling the appropriate round
-        method based on the player."""
+        Control the turn-taking process for each player.
+
+        This method determines the appropriate action for each player's turn,
+        calling the corresponding round method based on the player type.
+
+        If the current player is a computer, it invokes the 'computer_round'
+        method to manage the computer's turn. Otherwise, it calls the
+        'player_round' method to handle a human player's turn.
+
+        """
         current_player = self.players[self.curr_player_index]
         if current_player.name == 'Computer':
             self.computer_round(current_player)
@@ -86,8 +114,9 @@ class Game:
 
     def player_round(self, current_player):
         """
-        Conducts a round of the game for a human player. When it is PvP,
-        two players both using this method.
+        Conducts a round of the game for a human player.
+
+        When it is PvP, two players both using this method.
         """
         if self.curr_player_index == 0:
             cprint('"roll"(r), "hold"(h), cheat(c) or "exit"(q)',
@@ -114,10 +143,7 @@ class Game:
             print('')
 
     def roll_dice(self, player):
-        """
-        Simulates rolling the die for the current player and handles the
-        outcomes.
-        """
+        """Simulate rolling the die for the player and handles the outcomes."""
         if self.curr_player_index == 0:
             cprint(f'{player.name} decided to roll.', 'yellow', attrs=['bold'])
         else:
@@ -135,7 +161,7 @@ class Game:
             self.roll_result_other(player, result)
 
     def hold(self, player):
-        """Handles the decision to hold the current player's turn."""
+        """Handle the decision to hold the current player's turn."""
         curr_points = player.current_points(0)
         player.reset_round_points()
         if self.curr_player_index == 0:
@@ -156,10 +182,7 @@ class Game:
         self.end_turn()
 
     def cheat(self, player, cheat):
-        """
-        Simulates a cheating move for the player, adding a specified amount
-        of points.
-        """
+        """Simulate a cheating move for the player, adding 1000 points."""
         cheat_points = player.current_points(cheat)
         if self.curr_player_index == 0:
             cprint(f"{player.name} decided to cheat.",
@@ -179,7 +202,7 @@ class Game:
         self.end_game()
 
     def roll_result_1(self, player):
-        """When die gets result 1, this method would be activated"""
+        """When die gets result 1, this method would be activated."""
         if self.curr_player_index == 0:
             cprint(f"{player.name} rolled a 1. Your turn is over.",
                    'yellow', attrs=['bold'])
@@ -194,7 +217,7 @@ class Game:
         self.end_turn()
 
     def roll_result_other(self, player, result):
-        """When die gets other results than 1, this method would activate"""
+        """When die gets other results than 1, this method would activate."""
         player.add_round_points(result)
         curr_points = player.current_points(result)
         if self.curr_player_index == 0:
@@ -216,7 +239,7 @@ class Game:
             self.end_game()
 
     def high_score_list_checking(self, name, points):
-        """ Updates the high score list based on the game mode and player."""
+        """Update the high score list based on the game mode and player."""
         score = Score()
         if self.mode == "PvC" and name != "Computer":
             score.pvc_new_record(name, points)
@@ -224,19 +247,19 @@ class Game:
             score.pvp_new_record(name, points)
 
     def end_game(self):
-        """End the game"""
+        """End the game."""
         self.game_over = True
 
     def end_turn(self):
-        """Ends the current player's turn and switches to the next player."""
+        """End the current player's turn and switches to the next player."""
         self.curr_player_index = (self.curr_player_index + 1) % 2
 
     def start_round(self):
-        """Start a round"""
+        """Start a round."""
         self.round_finished = False
 
     def end_round(self):
-        """Ends the round after all the players finished"""
+        """End the round after all the players finished."""
         if self.curr_player_index == 1:
             self.round_finished = True
             self.round_count += 1
