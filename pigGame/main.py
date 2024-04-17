@@ -1,4 +1,4 @@
-"""To start the game"""
+"""To start the game."""
 from pigGame.menu import Menu
 from pigGame.score import Score
 

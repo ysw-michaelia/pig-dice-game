@@ -29,8 +29,10 @@ init(strip=not sys.stdout.isatty())
 
 class Menu:
     """
-    Represents the main menu of the game, handling user input for game options,
-    including starting a game, viewing rules, checking scores, and exiting.
+    Represent the main menu of the game.
+
+    It handls user input for game options, including starting a game,
+    viewing rules, checking scores, and exiting.
 
     Attributes:
         score (Score): An instance of the Score class to manage score-related
@@ -40,14 +42,22 @@ class Menu:
     """
 
     def __init__(self, score):
+        """
+        Initialize the Menu class.
+
+        Args:
+            score (Score): An instance of the Score class.
+        """
         self.score = score
         self.score.load_scores()
         self.game_settings = GameSettings(score)
 
     def menu_main(self):
         """
-        Displays the main menu and handles the user's input to navigate
-        through the menu options.
+        Display the main menu.
+
+        Displays the main menu options, allowing the user to start a new game,
+        view game rules, check scores, or exit the game.
         """
         cprint(figlet_format('pig', font='isometric1'),
                'green', 'on_black', attrs=['bold'])
@@ -79,8 +89,9 @@ class Menu:
 
     def start_game(self):
         """
-        Displays the game mode options and delegates the setting up of the
-        game based on the user's choice.
+        Display the game mode options.
+
+        Delegates the setting up of the game based on the user's choice.
         """
         while True:
             cprint("Choose playing mode, numbers only:",
@@ -102,9 +113,7 @@ class Menu:
                        "red", attrs=["bold"])
 
     def show_game_rules(self):
-        """
-        Prints the rules of the game to the console.
-        """
+        """Print the rules of the game to the console."""
         cprint(cowsay.get_output_string('tux', '''
         Each turn, a player repeatedly rolls a die until
         either a 1 is rolled or the player decides to
@@ -121,8 +130,9 @@ class Menu:
 
     def show_scores(self):
         """
-        Displays the score menu, allowing users to view high scores or search
-        for a player's scores.
+        Display the score menu.
+
+        It allows users to view high scores or search for a player's scores.
         """
         while True:
             cprint('Choose the list you want to check, numbers only',
@@ -150,8 +160,9 @@ class Menu:
 
     def search_record(self):
         """
-        Allows searching for a player's score record by name and offers the
-        option to change the player's name.
+        Allow searching for a player's score record by name.
+
+        It also offers the option to change the player's name.
         """
         cprint("Enter the player name you want to search for:",
                'green', attrs=['bold'])
@@ -166,8 +177,7 @@ class Menu:
 
     def change_username(self, name, pvc_player_exists, pvp_player_exists):
         """
-        Provides an interface for changing a player's name in the score
-        records.
+        Provide an interface for changing a player's name in the records.
 
         Args:
             name (str): The current name of the player.

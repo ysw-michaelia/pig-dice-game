@@ -1,6 +1,5 @@
 """
-The Score module provides functionality for managing and storing player scores
-in a game.
+The Score module provides functionality for managing and storing player scores.
 
 Attributes:
     pvc_high_scores (dict): A dictionary containing the high scores of players
@@ -17,8 +16,9 @@ init(strip=not sys.stdout.isatty())
 
 class Score:
     """
-    A class to manage and operate on game scores, including saving, loading,
-    updating, and printing high scores.
+    A class to manage and operate on game scores.
+
+    It  includs saving, loading, updating, and printing high scores.
 
     Attributes:
         pvc_high_scores (dict): A dictionary storing Player vs Computer scores.

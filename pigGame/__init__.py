@@ -1,1 +1,1 @@
-"""The pig dice game"""
+"""The pig dice game."""

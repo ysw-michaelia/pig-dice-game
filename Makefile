@@ -62,6 +62,13 @@ flake8:
 
 doc:
 	mkdir -p doc
-	$(PYTHON) -m pydoc -w pigGame
-	# mv *.html doc
+	$(PYTHON) -m pydoc -b -w pigGame
+	# mv *.html doc/api
+
+pyreverse:
+	install -d doc/uml
+	pyreverse pigGame/*.py
+	dot -Tpng classes.dot -o doc/uml/classes.png
+	dot -Tpng packages.dot -o doc/uml/packages.png
+	rm -f classes.dot packages.dot
 
