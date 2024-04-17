@@ -4,7 +4,7 @@ import random
 
 class Dice:
     """
-    Represents a dice object with methods for rolling.
+    Represent a dice object with methods for rolling.
 
     Attributes:
         probability (list or None): A list representing the possible outcomes
@@ -14,11 +14,36 @@ class Dice:
     """
 
     def __init__(self, probability=None):
+        """
+        Initialize a Dice object with optional weighted probabilities.
+
+        Args:
+            probability (list or None, optional): A list representing the
+                possible outcomes of the dice roll. This parameter is used
+                only for PvC (Player vs Computer) games where weighted
+                probabilities are part of computer intelligence settings.
+                Each element in the list represents the weighted probability
+                of a specific outcome. Defaults to None, indicating that fair
+                probabilities are used for the dice roll.
+
+        Attributes:
+            probability (list or None): A list representing the possible
+                outcomes of the dice roll. If provided, it contains the
+                weighted probabilities of each outcome.
+
+        Example:
+            # Initialize a Dice object with fair probabilities
+            dice = Dice()
+
+            # Initialize a Dice object with custom probabilities
+            custom_probabilities = [0.1, 0.2, 0.3, 0.2, 0.1, 0.1]
+            dice = Dice(probability=custom_probabilities)
+        """
         self.probability = probability
 
     def computer_roll(self):
         """
-        Simulates a computer dice roll based on the provided probability.
+        Simulate a computer dice roll based on the provided probability.
 
         Returns:
             int: The outcome of the dice roll based on the provided
@@ -28,7 +53,7 @@ class Dice:
 
     def player_roll(self):
         """
-        Simulates a player dice roll with fair probabilities.
+        Simulate a player dice roll with fair probabilities.
 
         Returns:
             int: The outcome of the dice roll with fair probabilities.
