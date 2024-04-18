@@ -95,6 +95,22 @@ class testMenu(unittest.TestCase):
             is added to their score, and it becomes the next
             player's turn. The first player to score 100 or
             more points wins.
+
+            If the mode selected is PvC, players must specify
+            the difficulty level, including the probability
+            of dice and the computer's strategy. These
+            parameters are exclusive to computer players:
+
+            Probability of dice: Ranges from 1 to 5. A value
+            of 1 indicates a standard dice roll rate. As the
+            value increases, the computer's chances of
+            obtaining higher points also increase.
+
+            Strategy: Also ranging from 1 to 5. A value of 1
+            represents a conservative strategy, where the
+            computer plays it safe. Higher values reflect a
+            more adventurous approach, with the computer
+            taking greater risks.
             """
         )
 
