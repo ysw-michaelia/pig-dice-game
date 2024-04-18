@@ -35,7 +35,7 @@ installed:
 
 run:
 	@printf "This Starts the game\n"
-	$(PYTHON) pigGame/main.py
+	$(PYTHON) -m pigGame.main
 
 # ---------------------------------------------------------
 # Test
@@ -55,6 +55,9 @@ pylint:
 flake8:
 	for f in pigGame/*.py ; do flake8 $${f} ; done
 
+lint:
+	for f in pigGame/*.py ; do flake8 $${f} && pylint $${f} ; done
+
 # ---------------------------------------------------------
 # Generating documentation
 #
@@ -71,4 +74,12 @@ pyreverse:
 	dot -Tpng classes.dot -o doc/uml/classes.png
 	dot -Tpng packages.dot -o doc/uml/packages.png
 	rm -f classes.dot packages.dot
+
+# ---------------------------------------------------------
+# clean up artifacts from previous builds
+#
+clean:
+	rm -r pigGame/__pycache__
+	rm -r tests/__pycache__
+	rm -r .venv
 
