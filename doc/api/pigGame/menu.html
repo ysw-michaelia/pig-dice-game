@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>pigGame.menu API documentation</title>
+<meta name="description" content="This module defines the Menu class which represents the main menu interface …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>pigGame.menu</code></h1>
+</header>
+<section id="section-intro">
+<p>This module defines the Menu class which represents the main menu interface.</p>
+<p>The Menu class provides functionalities for navigating through different
+options in the game's main menu. These options include starting a new game,
+viewing the game rules, checking high scores, and exiting the game.
+It interacts with other components such as the Score class for score
+management and the GameSettings class for configuring game settings before
+the start of a game.</p>
+<h2 id="classes">Classes</h2>
+<p>Menu: Handles the display and navigation of the game's main menu.</p>
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li>score.py: Contains the Score class used for managing score-related
+functionalities.</li>
+<li>gameSettings.py: Contains the GameSettings class used for configuring
+game settings.</li>
+</ul>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+This module defines the Menu class which represents the main menu interface.
+
+The Menu class provides functionalities for navigating through different
+options in the game&#39;s main menu. These options include starting a new game,
+viewing the game rules, checking high scores, and exiting the game.
+It interacts with other components such as the Score class for score
+management and the GameSettings class for configuring game settings before
+the start of a game.
+
+Classes:
+    Menu: Handles the display and navigation of the game&#39;s main menu.
+
+Dependencies:
+    - score.py: Contains the Score class used for managing score-related
+    functionalities.
+    - gameSettings.py: Contains the GameSettings class used for configuring
+    game settings.
+&#34;&#34;&#34;
+
+import sys
+import cowsay
+from termcolor import cprint
+from pyfiglet import figlet_format
+from colorama import init
+from pigGame.game_settings import GameSettings
+
+init(strip=not sys.stdout.isatty())
+
+
+class Menu:
+    &#34;&#34;&#34;
+    Represent the main menu of the game.
+
+    It handls user input for game options, including starting a game,
+    viewing rules, checking scores, and exiting.
+
+    Attributes:
+        score (Score): An instance of the Score class to manage score-related
+        functionalities.
+        game_settings (GameSettings): An instance of the GameSettings class to
+        configure game settings.
+    &#34;&#34;&#34;
+
+    def __init__(self, score):
+        &#34;&#34;&#34;
+        Initialize the Menu class.
+
+        Args:
+            score (Score): An instance of the Score class.
+        &#34;&#34;&#34;
+        self.score = score
+        self.score.load_scores()
+        self.game_settings = GameSettings(score)
+
+    def menu_main(self):
+        &#34;&#34;&#34;
+        Display the main menu.
+
+        Displays the main menu options, allowing the user to start a new game,
+        view game rules, check scores, or exit the game.
+        &#34;&#34;&#34;
+        cprint(
+            figlet_format(&#34;pig&#34;, font=&#34;isometric1&#34;), &#34;green&#34;, &#34;on_black&#34;,
+            attrs=[&#34;bold&#34;]
+        )
+        while True:
+            cprint(
+                &#34;Welcome to Pig. Please choose an option, numbers only:&#34;,
+                &#34;green&#34;,
+                attrs=[&#34;bold&#34;],
+            )
+            cprint(&#34;1. Start game&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;2. Game rules&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;3. Scores&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;4. Exit&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            choice_menu = input()
+            print(&#34;&#34;)
+
+            if choice_menu == &#34;1&#34;:
+                self.start_game()
+            elif choice_menu == &#34;2&#34;:
+                self.show_game_rules()
+            elif choice_menu == &#34;3&#34;:
+                self.show_scores()
+            elif choice_menu == &#34;4&#34;:
+                cprint(&#34;Saving...&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                self.score.save_scores()
+                cprint(&#34;Thank you! See you next time!&#34;, &#34;green&#34;,
+                       attrs=[&#34;bold&#34;])
+                break
+            else:
+                cprint(
+                    &#34;Invalid value. Please enter numbers only&#34;, &#34;red&#34;,
+                    attrs=[&#34;bold&#34;]
+                )
+
+    def start_game(self):
+        &#34;&#34;&#34;
+        Display the game mode options.
+
+        Delegates the setting up of the game based on the user&#39;s choice.
+        &#34;&#34;&#34;
+        while True:
+            cprint(&#34;Choose playing mode, numbers only:&#34;, &#34;green&#34;,
+                   attrs=[&#34;bold&#34;])
+            cprint(&#34;1. Play against computer&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;2. Two players&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;3. Back&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            choice_mode = input()
+            print(&#34;&#34;)
+
+            if choice_mode == &#34;1&#34;:
+                self.game_settings.against_computer()
+            elif choice_mode == &#34;2&#34;:
+                self.game_settings.against_player()
+            elif choice_mode == &#34;3&#34;:
+                break
+            else:
+                cprint(
+                    &#34;Invalid value. Please enter numbers only&#34;, &#34;red&#34;,
+                    attrs=[&#34;bold&#34;]
+                )
+
+    def show_game_rules(self):
+        &#34;&#34;&#34;Print the rules of the game to the console.&#34;&#34;&#34;
+        cprint(
+            cowsay.get_output_string(
+                &#34;tux&#34;,
+                &#34;&#34;&#34;
+        Each turn, a player repeatedly rolls a die until
+        either a 1 is rolled or the player decides to
+        &#34;hold&#34;: If the player rolls a 1, they score
+        nothing and it becomes the next player&#39;s turn.
+        If the player rolls any other number, it is added
+        to their turn total and the player&#39;s turn
+        continues.
+        If a player chooses to &#34;hold&#34;, their turn total
+        is added to their score, and it becomes the next
+        player&#39;s turn. The first player to score 100 or
+        more points wins.
+        &#34;&#34;&#34;,
+            ),
+            &#34;yellow&#34;,
+            attrs=[&#34;bold&#34;],
+        )
+
+    def show_scores(self):
+        &#34;&#34;&#34;
+        Display the score menu.
+
+        It allows users to view high scores or search for a player&#39;s scores.
+        &#34;&#34;&#34;
+        while True:
+            cprint(
+                &#34;Choose the list you want to check, numbers only&#34;,
+                &#34;green&#34;,
+                attrs=[&#34;bold&#34;],
+            )
+            cprint(&#34;1. PvC high score ranking&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;2. PvP high score ranking&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;3. Search for player&#39;s record&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;4. Back&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            choice_score = input()
+            print(&#34;&#34;)
+            if choice_score == &#34;1&#34;:
+                self.score.print_top_ten(&#34;PvC&#34;)
+                print(&#34;&#34;)
+            elif choice_score == &#34;2&#34;:
+                self.score.print_top_ten(&#34;PvP&#34;)
+                print(&#34;&#34;)
+            elif choice_score == &#34;3&#34;:
+                self.search_record()
+            elif choice_score == &#34;4&#34;:
+                break
+            else:
+                cprint(
+                    &#34;Invalid value. Please enter numbers only&#34;, &#34;red&#34;,
+                    attrs=[&#34;bold&#34;]
+                )
+
+    def search_record(self):
+        &#34;&#34;&#34;
+        Allow searching for a player&#39;s score record by name.
+
+        It also offers the option to change the player&#39;s name.
+        &#34;&#34;&#34;
+        cprint(&#34;Enter the player name you want to search for:&#34;, &#34;green&#34;,
+               attrs=[&#34;bold&#34;])
+        name = input()
+        print(&#34;&#34;)
+        pvc_player_exists = self.score.get_player_pvc_scores(name)
+        print(&#34;&#34;)
+        pvp_player_exists = self.score.get_player_pvp_scores(name)
+        print(&#34;&#34;)
+        if pvc_player_exists or pvp_player_exists:
+            self.change_username(name, pvc_player_exists, pvp_player_exists)
+
+    def change_username(self, name, pvc_player_exists, pvp_player_exists):
+        &#34;&#34;&#34;
+        Provide an interface for changing a player&#39;s name in the records.
+
+        Args:
+            name (str): The current name of the player.
+            pvc_player_exists (bool): Indicates if the player has a PvC
+            (Player vs Computer) score record.
+            pvp_player_exists (bool): Indicates if the player has a PvP
+            (Player vs Player) score record.
+        &#34;&#34;&#34;
+        cprint(
+            &#34;Press &#39;c&#39; to change name, press any keys to go back&#34;,
+            &#34;green&#34;,
+            attrs=[&#34;bold&#34;],
+        )
+        choice = input().lower()
+        print(&#34;&#34;)
+        if choice == &#34;c&#34;:
+            if pvc_player_exists and pvp_player_exists:
+                while True:
+                    cprint(
+                        &#34;In which mode do you want to change your name?&#34;,
+                        &#34;green&#34;,
+                        attrs=[&#34;bold&#34;],
+                    )
+                    cprint(&#34;1. PvC&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                    cprint(&#34;2. PvP&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                    cprint(&#34;3. Back&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                    cprint(&#34;Enter number only&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                    choice_name = input()
+                    if choice_name == &#34;1&#34;:
+                        self.score.update_player_name(name, 1)
+                    elif choice_name == &#34;2&#34;:
+                        self.score.update_player_name(name, 2)
+                    elif choice_name == &#34;3&#34;:
+                        break
+                    else:
+                        cprint(
+                            &#34;Invalid value. Please enter numbers only&#34;,
+                            &#34;red&#34;,
+                            attrs=[&#34;bold&#34;],
+                        )
+            elif pvc_player_exists:
+                self.score.update_player_name(name, 1)
+            elif pvp_player_exists:
+                self.score.update_player_name(name, 2)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="pigGame.menu.Menu"><code class="flex name class">
+<span>class <span class="ident">Menu</span></span>
+<span>(</span><span>score)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Represent the main menu of the game.</p>
+<p>It handls user input for game options, including starting a game,
+viewing rules, checking scores, and exiting.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>score</code></strong> :&ensp;<code>Score</code></dt>
+<dd>An instance of the Score class to manage score-related</dd>
+<dt>functionalities.</dt>
+<dt><strong><code>game_settings</code></strong> :&ensp;<code>GameSettings</code></dt>
+<dd>An instance of the GameSettings class to</dd>
+</dl>
+<p>configure game settings.
+Initialize the Menu class.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>score</code></strong> :&ensp;<code>Score</code></dt>
+<dd>An instance of the Score class.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Menu:
+    &#34;&#34;&#34;
+    Represent the main menu of the game.
+
+    It handls user input for game options, including starting a game,
+    viewing rules, checking scores, and exiting.
+
+    Attributes:
+        score (Score): An instance of the Score class to manage score-related
+        functionalities.
+        game_settings (GameSettings): An instance of the GameSettings class to
+        configure game settings.
+    &#34;&#34;&#34;
+
+    def __init__(self, score):
+        &#34;&#34;&#34;
+        Initialize the Menu class.
+
+        Args:
+            score (Score): An instance of the Score class.
+        &#34;&#34;&#34;
+        self.score = score
+        self.score.load_scores()
+        self.game_settings = GameSettings(score)
+
+    def menu_main(self):
+        &#34;&#34;&#34;
+        Display the main menu.
+
+        Displays the main menu options, allowing the user to start a new game,
+        view game rules, check scores, or exit the game.
+        &#34;&#34;&#34;
+        cprint(
+            figlet_format(&#34;pig&#34;, font=&#34;isometric1&#34;), &#34;green&#34;, &#34;on_black&#34;,
+            attrs=[&#34;bold&#34;]
+        )
+        while True:
+            cprint(
+                &#34;Welcome to Pig. Please choose an option, numbers only:&#34;,
+                &#34;green&#34;,
+                attrs=[&#34;bold&#34;],
+            )
+            cprint(&#34;1. Start game&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;2. Game rules&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;3. Scores&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;4. Exit&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            choice_menu = input()
+            print(&#34;&#34;)
+
+            if choice_menu == &#34;1&#34;:
+                self.start_game()
+            elif choice_menu == &#34;2&#34;:
+                self.show_game_rules()
+            elif choice_menu == &#34;3&#34;:
+                self.show_scores()
+            elif choice_menu == &#34;4&#34;:
+                cprint(&#34;Saving...&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                self.score.save_scores()
+                cprint(&#34;Thank you! See you next time!&#34;, &#34;green&#34;,
+                       attrs=[&#34;bold&#34;])
+                break
+            else:
+                cprint(
+                    &#34;Invalid value. Please enter numbers only&#34;, &#34;red&#34;,
+                    attrs=[&#34;bold&#34;]
+                )
+
+    def start_game(self):
+        &#34;&#34;&#34;
+        Display the game mode options.
+
+        Delegates the setting up of the game based on the user&#39;s choice.
+        &#34;&#34;&#34;
+        while True:
+            cprint(&#34;Choose playing mode, numbers only:&#34;, &#34;green&#34;,
+                   attrs=[&#34;bold&#34;])
+            cprint(&#34;1. Play against computer&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;2. Two players&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;3. Back&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            choice_mode = input()
+            print(&#34;&#34;)
+
+            if choice_mode == &#34;1&#34;:
+                self.game_settings.against_computer()
+            elif choice_mode == &#34;2&#34;:
+                self.game_settings.against_player()
+            elif choice_mode == &#34;3&#34;:
+                break
+            else:
+                cprint(
+                    &#34;Invalid value. Please enter numbers only&#34;, &#34;red&#34;,
+                    attrs=[&#34;bold&#34;]
+                )
+
+    def show_game_rules(self):
+        &#34;&#34;&#34;Print the rules of the game to the console.&#34;&#34;&#34;
+        cprint(
+            cowsay.get_output_string(
+                &#34;tux&#34;,
+                &#34;&#34;&#34;
+        Each turn, a player repeatedly rolls a die until
+        either a 1 is rolled or the player decides to
+        &#34;hold&#34;: If the player rolls a 1, they score
+        nothing and it becomes the next player&#39;s turn.
+        If the player rolls any other number, it is added
+        to their turn total and the player&#39;s turn
+        continues.
+        If a player chooses to &#34;hold&#34;, their turn total
+        is added to their score, and it becomes the next
+        player&#39;s turn. The first player to score 100 or
+        more points wins.
+        &#34;&#34;&#34;,
+            ),
+            &#34;yellow&#34;,
+            attrs=[&#34;bold&#34;],
+        )
+
+    def show_scores(self):
+        &#34;&#34;&#34;
+        Display the score menu.
+
+        It allows users to view high scores or search for a player&#39;s scores.
+        &#34;&#34;&#34;
+        while True:
+            cprint(
+                &#34;Choose the list you want to check, numbers only&#34;,
+                &#34;green&#34;,
+                attrs=[&#34;bold&#34;],
+            )
+            cprint(&#34;1. PvC high score ranking&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;2. PvP high score ranking&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;3. Search for player&#39;s record&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            cprint(&#34;4. Back&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            choice_score = input()
+            print(&#34;&#34;)
+            if choice_score == &#34;1&#34;:
+                self.score.print_top_ten(&#34;PvC&#34;)
+                print(&#34;&#34;)
+            elif choice_score == &#34;2&#34;:
+                self.score.print_top_ten(&#34;PvP&#34;)
+                print(&#34;&#34;)
+            elif choice_score == &#34;3&#34;:
+                self.search_record()
+            elif choice_score == &#34;4&#34;:
+                break
+            else:
+                cprint(
+                    &#34;Invalid value. Please enter numbers only&#34;, &#34;red&#34;,
+                    attrs=[&#34;bold&#34;]
+                )
+
+    def search_record(self):
+        &#34;&#34;&#34;
+        Allow searching for a player&#39;s score record by name.
+
+        It also offers the option to change the player&#39;s name.
+        &#34;&#34;&#34;
+        cprint(&#34;Enter the player name you want to search for:&#34;, &#34;green&#34;,
+               attrs=[&#34;bold&#34;])
+        name = input()
+        print(&#34;&#34;)
+        pvc_player_exists = self.score.get_player_pvc_scores(name)
+        print(&#34;&#34;)
+        pvp_player_exists = self.score.get_player_pvp_scores(name)
+        print(&#34;&#34;)
+        if pvc_player_exists or pvp_player_exists:
+            self.change_username(name, pvc_player_exists, pvp_player_exists)
+
+    def change_username(self, name, pvc_player_exists, pvp_player_exists):
+        &#34;&#34;&#34;
+        Provide an interface for changing a player&#39;s name in the records.
+
+        Args:
+            name (str): The current name of the player.
+            pvc_player_exists (bool): Indicates if the player has a PvC
+            (Player vs Computer) score record.
+            pvp_player_exists (bool): Indicates if the player has a PvP
+            (Player vs Player) score record.
+        &#34;&#34;&#34;
+        cprint(
+            &#34;Press &#39;c&#39; to change name, press any keys to go back&#34;,
+            &#34;green&#34;,
+            attrs=[&#34;bold&#34;],
+        )
+        choice = input().lower()
+        print(&#34;&#34;)
+        if choice == &#34;c&#34;:
+            if pvc_player_exists and pvp_player_exists:
+                while True:
+                    cprint(
+                        &#34;In which mode do you want to change your name?&#34;,
+                        &#34;green&#34;,
+                        attrs=[&#34;bold&#34;],
+                    )
+                    cprint(&#34;1. PvC&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                    cprint(&#34;2. PvP&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                    cprint(&#34;3. Back&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                    cprint(&#34;Enter number only&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                    choice_name = input()
+                    if choice_name == &#34;1&#34;:
+                        self.score.update_player_name(name, 1)
+                    elif choice_name == &#34;2&#34;:
+                        self.score.update_player_name(name, 2)
+                    elif choice_name == &#34;3&#34;:
+                        break
+                    else:
+                        cprint(
+                            &#34;Invalid value. Please enter numbers only&#34;,
+                            &#34;red&#34;,
+                            attrs=[&#34;bold&#34;],
+                        )
+            elif pvc_player_exists:
+                self.score.update_player_name(name, 1)
+            elif pvp_player_exists:
+                self.score.update_player_name(name, 2)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="pigGame.menu.Menu.change_username"><code class="name flex">
+<span>def <span class="ident">change_username</span></span>(<span>self, name, pvc_player_exists, pvp_player_exists)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Provide an interface for changing a player's name in the records.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The current name of the player.</dd>
+<dt><strong><code>pvc_player_exists</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Indicates if the player has a PvC</dd>
+<dt>(Player vs Computer) score record.</dt>
+<dt><strong><code>pvp_player_exists</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Indicates if the player has a PvP</dd>
+</dl>
+<p>(Player vs Player) score record.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def change_username(self, name, pvc_player_exists, pvp_player_exists):
+    &#34;&#34;&#34;
+    Provide an interface for changing a player&#39;s name in the records.
+
+    Args:
+        name (str): The current name of the player.
+        pvc_player_exists (bool): Indicates if the player has a PvC
+        (Player vs Computer) score record.
+        pvp_player_exists (bool): Indicates if the player has a PvP
+        (Player vs Player) score record.
+    &#34;&#34;&#34;
+    cprint(
+        &#34;Press &#39;c&#39; to change name, press any keys to go back&#34;,
+        &#34;green&#34;,
+        attrs=[&#34;bold&#34;],
+    )
+    choice = input().lower()
+    print(&#34;&#34;)
+    if choice == &#34;c&#34;:
+        if pvc_player_exists and pvp_player_exists:
+            while True:
+                cprint(
+                    &#34;In which mode do you want to change your name?&#34;,
+                    &#34;green&#34;,
+                    attrs=[&#34;bold&#34;],
+                )
+                cprint(&#34;1. PvC&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                cprint(&#34;2. PvP&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                cprint(&#34;3. Back&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                cprint(&#34;Enter number only&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+                choice_name = input()
+                if choice_name == &#34;1&#34;:
+                    self.score.update_player_name(name, 1)
+                elif choice_name == &#34;2&#34;:
+                    self.score.update_player_name(name, 2)
+                elif choice_name == &#34;3&#34;:
+                    break
+                else:
+                    cprint(
+                        &#34;Invalid value. Please enter numbers only&#34;,
+                        &#34;red&#34;,
+                        attrs=[&#34;bold&#34;],
+                    )
+        elif pvc_player_exists:
+            self.score.update_player_name(name, 1)
+        elif pvp_player_exists:
+            self.score.update_player_name(name, 2)</code></pre>
+</details>
+</dd>
+<dt id="pigGame.menu.Menu.menu_main"><code class="name flex">
+<span>def <span class="ident">menu_main</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display the main menu.</p>
+<p>Displays the main menu options, allowing the user to start a new game,
+view game rules, check scores, or exit the game.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def menu_main(self):
+    &#34;&#34;&#34;
+    Display the main menu.
+
+    Displays the main menu options, allowing the user to start a new game,
+    view game rules, check scores, or exit the game.
+    &#34;&#34;&#34;
+    cprint(
+        figlet_format(&#34;pig&#34;, font=&#34;isometric1&#34;), &#34;green&#34;, &#34;on_black&#34;,
+        attrs=[&#34;bold&#34;]
+    )
+    while True:
+        cprint(
+            &#34;Welcome to Pig. Please choose an option, numbers only:&#34;,
+            &#34;green&#34;,
+            attrs=[&#34;bold&#34;],
+        )
+        cprint(&#34;1. Start game&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        cprint(&#34;2. Game rules&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        cprint(&#34;3. Scores&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        cprint(&#34;4. Exit&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        choice_menu = input()
+        print(&#34;&#34;)
+
+        if choice_menu == &#34;1&#34;:
+            self.start_game()
+        elif choice_menu == &#34;2&#34;:
+            self.show_game_rules()
+        elif choice_menu == &#34;3&#34;:
+            self.show_scores()
+        elif choice_menu == &#34;4&#34;:
+            cprint(&#34;Saving...&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+            self.score.save_scores()
+            cprint(&#34;Thank you! See you next time!&#34;, &#34;green&#34;,
+                   attrs=[&#34;bold&#34;])
+            break
+        else:
+            cprint(
+                &#34;Invalid value. Please enter numbers only&#34;, &#34;red&#34;,
+                attrs=[&#34;bold&#34;]
+            )</code></pre>
+</details>
+</dd>
+<dt id="pigGame.menu.Menu.search_record"><code class="name flex">
+<span>def <span class="ident">search_record</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Allow searching for a player's score record by name.</p>
+<p>It also offers the option to change the player's name.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def search_record(self):
+    &#34;&#34;&#34;
+    Allow searching for a player&#39;s score record by name.
+
+    It also offers the option to change the player&#39;s name.
+    &#34;&#34;&#34;
+    cprint(&#34;Enter the player name you want to search for:&#34;, &#34;green&#34;,
+           attrs=[&#34;bold&#34;])
+    name = input()
+    print(&#34;&#34;)
+    pvc_player_exists = self.score.get_player_pvc_scores(name)
+    print(&#34;&#34;)
+    pvp_player_exists = self.score.get_player_pvp_scores(name)
+    print(&#34;&#34;)
+    if pvc_player_exists or pvp_player_exists:
+        self.change_username(name, pvc_player_exists, pvp_player_exists)</code></pre>
+</details>
+</dd>
+<dt id="pigGame.menu.Menu.show_game_rules"><code class="name flex">
+<span>def <span class="ident">show_game_rules</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print the rules of the game to the console.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_game_rules(self):
+    &#34;&#34;&#34;Print the rules of the game to the console.&#34;&#34;&#34;
+    cprint(
+        cowsay.get_output_string(
+            &#34;tux&#34;,
+            &#34;&#34;&#34;
+    Each turn, a player repeatedly rolls a die until
+    either a 1 is rolled or the player decides to
+    &#34;hold&#34;: If the player rolls a 1, they score
+    nothing and it becomes the next player&#39;s turn.
+    If the player rolls any other number, it is added
+    to their turn total and the player&#39;s turn
+    continues.
+    If a player chooses to &#34;hold&#34;, their turn total
+    is added to their score, and it becomes the next
+    player&#39;s turn. The first player to score 100 or
+    more points wins.
+    &#34;&#34;&#34;,
+        ),
+        &#34;yellow&#34;,
+        attrs=[&#34;bold&#34;],
+    )</code></pre>
+</details>
+</dd>
+<dt id="pigGame.menu.Menu.show_scores"><code class="name flex">
+<span>def <span class="ident">show_scores</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display the score menu.</p>
+<p>It allows users to view high scores or search for a player's scores.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_scores(self):
+    &#34;&#34;&#34;
+    Display the score menu.
+
+    It allows users to view high scores or search for a player&#39;s scores.
+    &#34;&#34;&#34;
+    while True:
+        cprint(
+            &#34;Choose the list you want to check, numbers only&#34;,
+            &#34;green&#34;,
+            attrs=[&#34;bold&#34;],
+        )
+        cprint(&#34;1. PvC high score ranking&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        cprint(&#34;2. PvP high score ranking&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        cprint(&#34;3. Search for player&#39;s record&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        cprint(&#34;4. Back&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        choice_score = input()
+        print(&#34;&#34;)
+        if choice_score == &#34;1&#34;:
+            self.score.print_top_ten(&#34;PvC&#34;)
+            print(&#34;&#34;)
+        elif choice_score == &#34;2&#34;:
+            self.score.print_top_ten(&#34;PvP&#34;)
+            print(&#34;&#34;)
+        elif choice_score == &#34;3&#34;:
+            self.search_record()
+        elif choice_score == &#34;4&#34;:
+            break
+        else:
+            cprint(
+                &#34;Invalid value. Please enter numbers only&#34;, &#34;red&#34;,
+                attrs=[&#34;bold&#34;]
+            )</code></pre>
+</details>
+</dd>
+<dt id="pigGame.menu.Menu.start_game"><code class="name flex">
+<span>def <span class="ident">start_game</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Display the game mode options.</p>
+<p>Delegates the setting up of the game based on the user's choice.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def start_game(self):
+    &#34;&#34;&#34;
+    Display the game mode options.
+
+    Delegates the setting up of the game based on the user&#39;s choice.
+    &#34;&#34;&#34;
+    while True:
+        cprint(&#34;Choose playing mode, numbers only:&#34;, &#34;green&#34;,
+               attrs=[&#34;bold&#34;])
+        cprint(&#34;1. Play against computer&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        cprint(&#34;2. Two players&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        cprint(&#34;3. Back&#34;, &#34;green&#34;, attrs=[&#34;bold&#34;])
+        choice_mode = input()
+        print(&#34;&#34;)
+
+        if choice_mode == &#34;1&#34;:
+            self.game_settings.against_computer()
+        elif choice_mode == &#34;2&#34;:
+            self.game_settings.against_player()
+        elif choice_mode == &#34;3&#34;:
+            break
+        else:
+            cprint(
+                &#34;Invalid value. Please enter numbers only&#34;, &#34;red&#34;,
+                attrs=[&#34;bold&#34;]
+            )</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="pigGame" href="index.html">pigGame</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="pigGame.menu.Menu" href="#pigGame.menu.Menu">Menu</a></code></h4>
+<ul class="two-column">
+<li><code><a title="pigGame.menu.Menu.change_username" href="#pigGame.menu.Menu.change_username">change_username</a></code></li>
+<li><code><a title="pigGame.menu.Menu.menu_main" href="#pigGame.menu.Menu.menu_main">menu_main</a></code></li>
+<li><code><a title="pigGame.menu.Menu.search_record" href="#pigGame.menu.Menu.search_record">search_record</a></code></li>
+<li><code><a title="pigGame.menu.Menu.show_game_rules" href="#pigGame.menu.Menu.show_game_rules">show_game_rules</a></code></li>
+<li><code><a title="pigGame.menu.Menu.show_scores" href="#pigGame.menu.Menu.show_scores">show_scores</a></code></li>
+<li><code><a title="pigGame.menu.Menu.start_game" href="#pigGame.menu.Menu.start_game">start_game</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

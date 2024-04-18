@@ -64,9 +64,7 @@ lint:
 .PHONY: doc
 
 doc:
-	mkdir -p doc
-	$(PYTHON) -m pydoc -b -w pigGame
-	# mv *.html doc/api
+	pdoc --html pigGame --output-dir doc/api
 
 pyreverse:
 	install -d doc/uml
@@ -81,5 +79,7 @@ pyreverse:
 clean:
 	rm -r pigGame/__pycache__
 	rm -r tests/__pycache__
+	rm -rf htmlcov
+	rm -f .coverage
 	rm -r .venv
 
