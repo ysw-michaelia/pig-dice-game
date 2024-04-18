@@ -7,10 +7,12 @@ Attributes:
     pvp_high_scores (dict): A dictionary containing the high scores of players
         in Player vs Player (PvP) mode.
 """
+
 import json
 import sys
 from termcolor import cprint
 from colorama import init
+
 init(strip=not sys.stdout.isatty())
 
 
@@ -32,20 +34,20 @@ class Score:
     def save_scores():
         """Save high scores to a JSON file named 'scores.json'."""
         data = {
-            'pvc_high_scores': Score.pvc_high_scores,
-            'pvp_high_scores': Score.pvp_high_scores
+            "pvc_high_scores": Score.pvc_high_scores,
+            "pvp_high_scores": Score.pvp_high_scores,
         }
-        with open('scores.json', 'w', encoding='utf-8') as file:
+        with open("scores.json", "w", encoding="utf-8") as file:
             json.dump(data, file)
 
     @staticmethod
     def load_scores():
         """Load high scores from the JSON file 'scores.json'."""
         try:
-            with open('scores.json', 'r', encoding='utf-8') as file:
+            with open("scores.json", "r", encoding="utf-8") as file:
                 scores = json.load(file)
-                Score.pvc_high_scores = scores.get('pvc_high_scores', {})
-                Score.pvp_high_scores = scores.get('pvp_high_scores', {})
+                Score.pvc_high_scores = scores.get("pvc_high_scores", {})
+                Score.pvp_high_scores = scores.get("pvp_high_scores", {})
         except FileNotFoundError:
             pass
 
@@ -114,20 +116,18 @@ class Score:
             high_scores (dict): The dictionary containing the high scores.
         """
         if not high_scores:
-            cprint(f"{mode} Top Ten High Scores:", 'green', attrs=['bold'])
-            cprint("No record", 'yellow', attrs=['bold'])
+            cprint(f"{mode} Top Ten High Scores:", "green", attrs=["bold"])
+            cprint("No record", "yellow", attrs=["bold"])
             return
 
         sorted_scores = sorted(
-            high_scores.items(),
-            key=lambda x: sum(x[1]),
-            reverse=True
+            high_scores.items(), key=lambda x: sum(x[1]), reverse=True
         )
-        cprint(f"{mode} Top Ten High Scores:", 'green', attrs=['bold'])
+        cprint(f"{mode} Top Ten High Scores:", "green", attrs=["bold"])
         for i, (player_name, scores) in enumerate(sorted_scores[:10], start=1):
             total_score = sum(scores)
-            cprint(f"{i}. {player_name}: {total_score}",
-                   'yellow', attrs=['bold'])
+            cprint(f"{i}. {player_name}: {total_score}", "yellow",
+                   attrs=["bold"])
 
     def get_player_pvc_scores(self, player_name):
         """
@@ -141,11 +141,13 @@ class Score:
         """
         if player_name in self.pvc_high_scores:
             scores = self.pvc_high_scores[player_name]
-            cprint(f"Scores for {player_name} in PvC: {scores}",
-                   'yellow', attrs=['bold'])
+            cprint(
+                f"Scores for {player_name} in PvC: {scores}", "yellow",
+                attrs=["bold"]
+            )
             return True
         else:
-            cprint("Name does not exist in PvC", 'yellow', attrs=['bold'])
+            cprint("Name does not exist in PvC", "yellow", attrs=["bold"])
             return False
 
     def get_player_pvp_scores(self, player_name):
@@ -160,11 +162,13 @@ class Score:
         """
         if player_name in self.pvp_high_scores:
             scores = self.pvp_high_scores[player_name]
-            cprint(f"Scores for {player_name} in PvP: {scores}",
-                   'yellow', attrs=['bold'])
+            cprint(
+                f"Scores for {player_name} in PvP: {scores}", "yellow",
+                attrs=["bold"]
+            )
             return True
         else:
-            cprint("Name does not exist in PvP", 'yellow', attrs=['bold'])
+            cprint("Name does not exist in PvP", "yellow", attrs=["bold"])
             return False
 
     def update_player_name(self, old_name, message):
@@ -182,13 +186,16 @@ class Score:
             high_scores = self.pvp_high_scores
 
         while True:
-            cprint("Your new name is:", 'green', attrs=['bold'])
+            cprint("Your new name is:", "green",
+                   attrs=["bold"])
             new_name = input()
-            print('')
+            print("")
             if old_name in high_scores:
                 if new_name not in high_scores:
                     high_scores[new_name] = high_scores.pop(old_name)
                     break
                 else:
-                    cprint(f'Name is already taken in {mode} list.',
-                           'red', attrs=['bold'])
+                    cprint(
+                        f"Name is already taken in {mode} list.", "red",
+                        attrs=["bold"]
+                    )

@@ -5,6 +5,7 @@ The game involves players taking turns rolling a die to accumulate points.
 The game can be played in different modes, including Player vs Player (PvP)
 and Player vs Computer (PvC).
 """
+
 import time
 import sys
 import cowsay
@@ -12,6 +13,7 @@ from termcolor import cprint
 from pyfiglet import figlet_format
 from colorama import init
 from pigGame.score import Score
+
 init(strip=not sys.stdout.isatty())
 
 
@@ -71,17 +73,27 @@ class Game:
         """
         while not self.game_over:
             if self.round_finished:
-                cprint(figlet_format(f'ROUND {self.round_count}',
-                                     font='banner3-D'),
-                       'green', 'on_black', attrs=['bold'])
+                cprint(
+                    figlet_format(f"ROUND {self.round_count}",
+                                  font="banner3-D"),
+                    "green",
+                    "on_black",
+                    attrs=["bold"],
+                )
                 self.start_round()
                 time.sleep(1)
             if self.curr_player_index == 0:
-                cprint(f"{self.players[self.curr_player_index].name}'s turn",
-                       "yellow", attrs=['bold'])
+                cprint(
+                    f"{self.players[self.curr_player_index].name}'s turn",
+                    "yellow",
+                    attrs=["bold"],
+                )
             else:
-                cprint(f"{self.players[self.curr_player_index].name}'s turn",
-                       "cyan", attrs=['bold'])
+                cprint(
+                    f"{self.players[self.curr_player_index].name}'s turn",
+                    "cyan",
+                    attrs=["bold"],
+                )
             self.take_turns()
 
     def take_turns(self):
@@ -97,7 +109,7 @@ class Game:
 
         """
         current_player = self.players[self.curr_player_index]
-        if current_player.name == 'Computer':
+        if current_player.name == "Computer":
             self.computer_round(current_player)
         else:
             self.player_round(current_player)
@@ -107,10 +119,10 @@ class Game:
         round_points = current_player.add_round_points(0)
         if self.strategy.choose_action(round_points) == "roll":
             self.roll_dice(current_player)
-            print('')
+            print("")
         else:
             self.hold(current_player)
-            print('')
+            print("")
 
     def player_round(self, current_player):
         """
@@ -119,11 +131,15 @@ class Game:
         When it is PvP, two players both using this method.
         """
         if self.curr_player_index == 0:
-            cprint('"roll"(r), "hold"(h), cheat(c) or "exit"(q)',
-                   'yellow', attrs=['bold'])
+            cprint(
+                '"roll"(r), "hold"(h), cheat(c) or "exit"(q)', "yellow",
+                attrs=["bold"]
+            )
         else:
-            cprint('"roll"(r), "hold"(h), cheat(c) or "exit"(q)',
-                   'cyan', attrs=['bold'])
+            cprint(
+                '"roll"(r), "hold"(h), cheat(c) or "exit"(q)', "cyan",
+                attrs=["bold"]
+            )
         decision = input().lower()
         if decision.lower() == "roll" or decision.lower() == "r":
             self.roll_dice(current_player)
@@ -132,22 +148,25 @@ class Game:
         elif decision.lower() == "cheat" or decision.lower() == "c":
             self.cheat(current_player, 1000)
         elif decision.lower() == "exit" or decision.lower() == "q":
-            cprint(cowsay.get_output_string('cow', 'Feel free to join again!'),
-                   'green', attrs=['bold'])
-            print('')
+            cprint(
+                cowsay.get_output_string("cow", "Feel free to join again!"),
+                "green",
+                attrs=["bold"],
+            )
+            print("")
             self.end_game()
         else:
             cprint("Invalid decision.")
             cprint("Try 'roll', 'hold' or 'exit'")
             cprint("or corresponding short cut: r, h or q.")
-            print('')
+            print("")
 
     def roll_dice(self, player):
         """Simulate rolling the die for the player and handles the outcomes."""
         if self.curr_player_index == 0:
-            cprint(f'{player.name} decided to roll.', 'yellow', attrs=['bold'])
+            cprint(f"{player.name} decided to roll.", "yellow", attrs=["bold"])
         else:
-            cprint(f'{player.name} decided to roll.', 'cyan', attrs=['bold'])
+            cprint(f"{player.name} decided to roll.", "cyan", attrs=["bold"])
         time.sleep(1)
 
         if player.name != "Computer":
@@ -165,18 +184,18 @@ class Game:
         curr_points = player.current_points(0)
         player.reset_round_points()
         if self.curr_player_index == 0:
-            cprint(f"{player.name} decided to hold.",
-                   "yellow", attrs=['bold'])
+            cprint(f"{player.name} decided to hold.", "yellow", attrs=["bold"])
             time.sleep(1)
-            cprint(f"{player.name} total points: {curr_points}",
-                   "yellow", attrs=['bold'])
+            cprint(
+                f"{player.name} total points: {curr_points}", "yellow",
+                attrs=["bold"]
+            )
         else:
-            cprint(f"{player.name} decided to hold.",
-                   "cyan", attrs=['bold'])
+            cprint(f"{player.name} decided to hold.", "cyan", attrs=["bold"])
             time.sleep(1)
-            cprint(f"{player.name} total points: {curr_points}",
-                   "cyan", attrs=['bold'])
-        print('')
+            cprint(f"{player.name} total points: {curr_points}", "cyan",
+                   attrs=["bold"])
+        print("")
         time.sleep(1)
         self.end_round()
         self.end_turn()
@@ -185,31 +204,44 @@ class Game:
         """Simulate a cheating move for the player, adding 1000 points."""
         cheat_points = player.current_points(cheat)
         if self.curr_player_index == 0:
-            cprint(f"{player.name} decided to cheat.",
-                   "yellow", attrs=['bold'])
-            cprint(f'{player.name} got {cheat}. Total points: {cheat_points}',
-                   "yellow", attrs=['bold'])
+            cprint(f"{player.name} decided to cheat.", "yellow",
+                   attrs=["bold"])
+            cprint(
+                f"{player.name} got {cheat}. Total points: {cheat_points}",
+                "yellow",
+                attrs=["bold"],
+            )
         else:
-            cprint(f"{player.name} decided to cheat.",
-                   "cyan", attrs=['bold'])
-            cprint(f'{player.name} got {cheat}. Total points: {cheat_points}',
-                   "cyan", attrs=['bold'])
-        cprint(cowsay.get_output_string(
-            'turtle', f'Congratulations! {player.name} wins!'),
-            'green', attrs=['bold'])
-        print('')
+            cprint(f"{player.name} decided to cheat.", "cyan", attrs=["bold"])
+            cprint(
+                f"{player.name} got {cheat}. Total points: {cheat_points}",
+                "cyan",
+                attrs=["bold"],
+            )
+        cprint(
+            cowsay.get_output_string("turtle",
+                                     f"Congratulations! {player.name} wins!"),
+            "green",
+            attrs=["bold"],
+        )
+        print("")
         self.high_score_list_checking(player.name, cheat_points)
         self.end_game()
 
     def roll_result_1(self, player):
         """When die gets result 1, this method would be activated."""
         if self.curr_player_index == 0:
-            cprint(f"{player.name} rolled a 1. Your turn is over.",
-                   'yellow', attrs=['bold'])
+            cprint(
+                f"{player.name} rolled a 1. Your turn is over.",
+                "yellow",
+                attrs=["bold"],
+            )
         else:
-            cprint(f"{player.name} rolled a 1. Your turn is over.",
-                   'cyan', attrs=['bold'])
-        print('')
+            cprint(
+                f"{player.name} rolled a 1. Your turn is over.", "cyan",
+                attrs=["bold"]
+            )
+        print("")
         time.sleep(1)
         player.current_points_adjust()
         player.reset_round_points()
@@ -221,20 +253,24 @@ class Game:
         player.add_round_points(result)
         curr_points = player.current_points(result)
         if self.curr_player_index == 0:
-            cprint(f'{player.name} got {result}.', 'yellow', attrs=['bold'])
+            cprint(f"{player.name} got {result}.", "yellow", attrs=["bold"])
             time.sleep(1)
-            cprint(f'Total points: {curr_points}', 'yellow', attrs=['bold'])
+            cprint(f"Total points: {curr_points}", "yellow", attrs=["bold"])
         else:
-            cprint(f'{player.name} got {result}.', 'cyan', attrs=['bold'])
+            cprint(f"{player.name} got {result}.", "cyan", attrs=["bold"])
             time.sleep(1)
-            cprint(f'Total points: {curr_points}', 'cyan', attrs=['bold'])
-        print('')
+            cprint(f"Total points: {curr_points}", "cyan", attrs=["bold"])
+        print("")
         time.sleep(1)
         if curr_points >= self.target_score:
-            cprint(cowsay.get_output_string(
-                'turtle', f'Congratulations! {player.name} wins!'),
-                'green', attrs=['bold'])
-            print('')
+            cprint(
+                cowsay.get_output_string(
+                    "turtle", f"Congratulations! {player.name} wins!"
+                ),
+                "green",
+                attrs=["bold"],
+            )
+            print("")
             self.high_score_list_checking(player.name, curr_points)
             self.end_game()
 

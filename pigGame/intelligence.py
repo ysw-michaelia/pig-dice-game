@@ -4,6 +4,7 @@ This module contains the Intelligence class.
 It represents the intelligence or decision-making logic for
 computer-controlled players in a game.
 """
+
 import random
 
 
@@ -64,13 +65,7 @@ class Intelligence:
         Returns:
             str: The action to be taken by computer(either 'roll' or 'hold').
         """
-        strategy_thresholds = {
-            1: 3,
-            2: 5,
-            3: 7,
-            4: 9,
-            5: 11
-        }
+        strategy_thresholds = {1: 3, 2: 5, 3: 7, 4: 9, 5: 11}
 
         threshold = strategy_thresholds.get(self.strategy)
 

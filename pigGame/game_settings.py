@@ -157,7 +157,7 @@ class GameSettings:
                 cprint('Your name is:', "green", attrs=["bold"])
                 name = input()
                 print('')
-                if name == "Computer" or name == "computer":
+                if name.lower() == "computer":
                     cprint('Invalid name, try a new one',
                            "red", attrs=["bold"])
                 elif not self.score.pvc_has_player(name):

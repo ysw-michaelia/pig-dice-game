@@ -1,4 +1,5 @@
 """This module provides a Dice class for simulating dice rolls in a game."""
+
 import random
 
 
