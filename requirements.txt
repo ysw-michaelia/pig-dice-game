@@ -1,14 +1,21 @@
-astroid==3.1.0
+# Code analysis
+flake8==7.0.0
+flake8-docstrings==1.7.0
+flake8-polyfill==1.0.2
+pylint==3.1.0
+
+# Code style
+black==24.4.0
+
+# Documentation
+pdoc3
+graphviz==0.20.3
+
+# Unit test and coverage
+coverage==7.4.4
+
+# Interface design
 colorama==0.4.6
 cowsay==6.1
-dill==0.3.8
-flake8==7.0.0
-isort==5.13.2
-mccabe==0.7.0
-platformdirs==4.2.0
-pycodestyle==2.11.1
-pyfiglet==1.0.2
-pyflakes==3.2.0
-pylint==3.1.0
 termcolor==2.4.0
-tomlkit==0.12.4
+pyfiglet==1.0.2
