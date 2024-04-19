@@ -1,7 +1,7 @@
 # Version of Python
 PYTHON ?= python
 
-# To define targets in each directory under the src/
+# To define targets in each directory under the pigGame/ and tests/
 define FOREACH
 	for DIR in pigGame/* tests/*; do \
 		$(MAKE) -C $$DIR $(1); \
@@ -38,7 +38,7 @@ run:
 	$(PYTHON) -m pigGame.main
 
 # ---------------------------------------------------------
-# Test
+# Test and analysis
 #
 
 test:
@@ -63,7 +63,10 @@ lint:
 #
 .PHONY: doc
 
-doc:
+pydoc:
+	$(PYTHON) -m pydoc -b -w pigGame
+
+pdoc:
 	pdoc --html pigGame --output-dir doc/api
 
 pyreverse:
