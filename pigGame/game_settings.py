@@ -118,21 +118,21 @@ class GameSettings:
                        "green", attrs=["bold"])
                 cprint("from 1 to 5:", "green", attrs=["bold"])
                 difficulty = input()
-                if difficulty in {"1", "2", "3", "4", "5"}:
-                    return difficulty
-                else:
+                if difficulty not in {"1", "2", "3", "4", "5"}:
                     cprint("Invalid value, please try again.",
                            "red", attrs=["bold"])
+                else:
+                    return difficulty
             elif message == 2:
                 cprint("Please choose computer strategy difficulty,",
                        "green", attrs=["bold"])
                 cprint("from 1 to 5:", "green", attrs=["bold"])
                 difficulty = input()
-                if difficulty in {"1", "2", "3", "4", "5"}:
-                    return difficulty
-                else:
+                if difficulty not in {"1", "2", "3", "4", "5"}:
                     cprint("Invalid value, please try again.",
                            "red", attrs=["bold"])
+                else:
+                    return difficulty
 
     def get_player_name(self, message):
         """
@@ -171,8 +171,8 @@ class GameSettings:
                        "green", attrs=["bold"])
                 name = input()
                 print('')
-                if not self.score.pvp_has_player(name):
-                    return Player(name)
-                else:
+                if self.score.pvp_has_player(name):
                     cprint('Name exists, try a new one.',
                            "red", attrs=["bold"])
+                else:
+                    return Player(name)

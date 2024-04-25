@@ -146,9 +146,8 @@ class Score:
                 attrs=["bold"]
             )
             return True
-        else:
-            cprint("Name does not exist in PvC", "yellow", attrs=["bold"])
-            return False
+        cprint("Name does not exist in PvC", "yellow", attrs=["bold"])
+        return False
 
     def get_player_pvp_scores(self, player_name):
         """
@@ -167,9 +166,8 @@ class Score:
                 attrs=["bold"]
             )
             return True
-        else:
-            cprint("Name does not exist in PvP", "yellow", attrs=["bold"])
-            return False
+        cprint("Name does not exist in PvP", "yellow", attrs=["bold"])
+        return False
 
     def update_player_name(self, old_name, message):
         """
@@ -194,8 +192,7 @@ class Score:
                 if new_name not in high_scores:
                     high_scores[new_name] = high_scores.pop(old_name)
                     break
-                else:
-                    cprint(
-                        f"Name is already taken in {mode} list.", "red",
-                        attrs=["bold"]
-                    )
+                cprint(
+                    f"Name is already taken in {mode} list.", "red",
+                    attrs=["bold"]
+                )

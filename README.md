@@ -13,7 +13,7 @@ Welcome to the Pig Game Project, a simple yet engaging game built in Python wher
 
 
 ## Features
-- Colorful design: The game interface is vibrant and colorful, even in the terminal environment.
+- Colorful design: The game interface is colorful, even in the terminal environment.
 - Two Game Modes: Enjoy both Player vs Player (PvP) and Player vs Computer (PvC) modes.
 - Adjustable Difficulty: Tailor the game to your preference by adjusting the probability of the dice and the computer's strategy in PvC mode.
 - Quit Anytime: Players have the freedom to quit the game at any point during gameplay.
@@ -26,7 +26,7 @@ Welcome to the Pig Game Project, a simple yet engaging game built in Python wher
 ## Installation
 Before getting started, ensure that you have Git Bash or Cygwin installed on your system. Additionally, you'll need to have Make installed to execute the provided commands seamlessly.
 
-If you haven't installed Git Bash or Cygwin yet, please refer to the course website for detailed instructions on how to do so. You can find the installation guide at the following link: [Lab Environment and Tools](https://hkr.instructure.com/courses/6796/pages/lab-environment-and-tools?module_item_id=352239)
+If you haven't installed Git Bash or Cygwin yet, please refer to the course website for detailed instructions on how to do so. You can find the installation guide at the course page: [Lab Environment and Tools](https://hkr.instructure.com/courses/6796/pages/lab-environment-and-tools?module_item_id=352239)
 
 After completing the requirements outlined above, proceed with the following steps:
 1. Clone the repository: git clone https://github.com/ysw-michaelia/pig-dice-game
@@ -45,6 +45,8 @@ You have two options for running the game:
 3. Run the following command: make run
 
 ### Option 2: Using Command Prompt (recommended)
+The reason for recommending the Command Prompt is that it's the only terminal environment that can accurately display the color scheme designed for the game.
+
 1. Open Command Prompt.
 2. Navigate to the root directory of the game (where you cloned the repository).
 3. Activate the virtual environment by executing the following commands: cd .venv\Scripts
@@ -52,7 +54,6 @@ You have two options for running the game:
 4. Navigate back to the root directory of the game by using: cd ..\..
 5. Navigate to the pigGame directory by executing: cd pigGame
 6. Finally, run the game by typing: python main.py
-7. The reason for recommending the Command Prompt is that it's the only terminal environment that can accurately display the color scheme designed for the game
 
 
 ## Game Description

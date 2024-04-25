@@ -42,16 +42,15 @@ class Intelligence:
         """
         if self.probability == 1:
             return [1, 2, 3, 4, 5, 6]
-        elif self.probability == 2:
+        if self.probability == 2:
             return [1, 1, 2, 3, 4, 5, 6, 6]
-        elif self.probability == 3:
+        if self.probability == 3:
             return [1, 1, 2, 2, 3, 4, 5, 5, 6, 6]
-        elif self.probability == 4:
+        if self.probability == 4:
             return [1, 1, 1, 2, 2, 3, 4, 5, 6, 6, 6]
-        elif self.probability == 5:
+        if self.probability == 5:
             return [1, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6, 6]
-        else:
-            return []
+        return []
 
     def choose_action(self, computer_round_points):
         """
@@ -71,9 +70,8 @@ class Intelligence:
 
         if computer_round_points < threshold:
             return "roll"
-        elif computer_round_points > threshold + 5:
+        if computer_round_points > threshold + 5:
             return "hold"
-        elif random.random() > self.probability / 6:
+        if random.random() > self.probability / 6:
             return "roll"
-        else:
-            return "hold"
+        return "hold"
