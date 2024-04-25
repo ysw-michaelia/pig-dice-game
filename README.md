@@ -52,8 +52,7 @@ The reason for recommending the Command Prompt is that it's the only terminal en
 3. Activate the virtual environment by executing the following commands: cd .venv\Scripts
                                                                         activate
 4. Navigate back to the root directory of the game by using: cd ..\..
-5. Navigate to the pigGame directory by executing: cd pigGame
-6. Finally, run the game by typing: python main.py
+5. Finally, run the game by typing: python -m pigGame.main
 
 
 ## Game Description
